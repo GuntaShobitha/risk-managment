@@ -29,6 +29,11 @@
         .dashboard-tab-pane.active { display: block; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* Mobile topbar: hamburger + brand + notification icon only */
+        @media (max-width: 768px) {
+            .topbar-bell { display: inline-flex !important; }
+        }
+
         /* Responsive helpers for dashboard sections */
         .dashboard-split-grid {
             display: grid;
@@ -142,30 +147,40 @@
         <main class="dashboard-main">
             <!-- TOPBAR -->
             <header class="dashboard-topbar">
-                <div style="display: flex; align-items: center; gap: 1rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem; min-width: 0;">
                     <button type="button" class="dashboard-sidebar-toggle" style="background: none; border: none; cursor: pointer; color: var(--primary);" aria-label="Toggle Navigation">
                         <span class="material-symbols-outlined" style="font-size: 28px;">menu</span>
                     </button>
-                    <div>
+                    <div class="topbar-mobile-brand">
+                        <span class="material-symbols-outlined">shield</span>
+                        <span>STACKLY</span>
+                        <span style="font-size: 0.68rem; letter-spacing: 0.12em; color: var(--secondary); border: 1px solid var(--secondary); padding: 0.1rem 0.45rem; border-radius: 4px; margin-left: 0.25rem;">ADMIN</span>
+                    </div>
+                    <div class="topbar-title" style="min-width: 0;">
                         <h2 style="font-size: 1.3rem; color: var(--primary);">Multi-Client Risk Administration Console</h2>
                         <span style="font-size: 0.8rem; color: var(--primary-70);">Global Tenant Oversight &amp; Audit Verification</span>
                     </div>
                 </div>
 
-                <div style="display: flex; align-items: center; gap: 1.5rem;">
-                    <div style="display: flex; align-items: center; gap: 0.5rem; background: var(--primary); padding: 0.4rem 0.85rem; border-radius: 50px; font-size: 0.82rem; font-weight: 700; color: var(--secondary); border: 1px solid var(--secondary);">
+                <div class="topbar-actions" style="display: flex; align-items: center; gap: 1.5rem;">
+                    <div class="topbar-role-badge" style="display: flex; align-items: center; gap: 0.5rem; background: var(--primary); padding: 0.4rem 0.85rem; border-radius: 50px; font-size: 0.82rem; font-weight: 700; color: var(--secondary); border: 1px solid var(--secondary);">
                         <span class="material-symbols-outlined" style="font-size: 18px;">admin_panel_settings</span>
                         <span>Role: <strong class="sync-user-role">Admin</strong></span>
                     </div>
 
-                    <a href="./index.html" class="btn-text" style="font-size: 0.85rem;">
+                    <a href="./index.html" class="btn-text topbar-public-link" style="font-size: 0.85rem;">
                         <span class="material-symbols-outlined">home</span>
                         <span>Public Site</span>
                     </a>
 
-                    <button type="button" onclick="stacklyLogout();" class="btn btn-secondary" style="padding: 0.45rem 1rem; font-size: 0.85rem;">
+                    <button type="button" onclick="stacklyLogout();" class="btn btn-secondary topbar-signout" style="padding: 0.45rem 1rem; font-size: 0.85rem;">
                         <span class="material-symbols-outlined">logout</span>
                         <span>Sign Out</span>
+                    </button>
+
+                    <button type="button" class="topbar-bell" aria-label="Notifications" onclick="stacklyTopbarBell();" style="display: none; background: none; border: 1px solid var(--primary-15); border-radius: 50%; width: 40px; height: 40px; align-items: center; justify-content: center; cursor: pointer; color: var(--primary); position: relative;">
+                        <span class="material-symbols-outlined" style="font-size: 22px;">notifications</span>
+                        <span style="position: absolute; top: 8px; right: 9px; width: 8px; height: 8px; border-radius: 50%; background: var(--secondary);"></span>
                     </button>
                 </div>
             </header>
@@ -515,6 +530,35 @@
                 <div class="data-card">
                     <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem;">Master Governance Audit Exports</h3>
                     <p style="font-size: 0.9rem; color: var(--primary-70); margin-bottom: 1.5rem;">Download consolidated multi-tenant oversight dossiers.</p>
+                    <div class="data-table-wrap">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Report Identifier</th>
+                                    <th>Scope</th>
+                                    <th>Generated</th>
+                                    <th>Format</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>GOV-2026-Q3-001</td>
+                                    <td>All-Tenant Exposure Summary</td>
+                                    <td>Sep 15, 2026</td>
+                                    <td>PDF (4.8 MB)</td>
+                                    <td><span class="badge-risk badge-low">Ready</span></td>
+                                </tr>
+                                <tr>
+                                    <td>GOV-2026-Q3-002</td>
+                                    <td>Critical Risk Escalation Ledger</td>
+                                    <td>Sep 18, 2026</td>
+                                    <td>XLSX (820 KB)</td>
+                                    <td><span class="badge-risk badge-moderate">Generating</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="dashboard-tile-grid">
                         <div class="dashboard-tile">
                             <span class="material-symbols-outlined">picture_as_pdf</span>
@@ -713,13 +757,47 @@
                             <input type="email" id="settings-email-input" class="form-control" value="admin@stackly.com" required>
                         </div>
 
-                        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                        <div style="display: flex; gap: 1rem; margin-top: 2rem;" class="form-row-inline">
                             <button type="submit" class="btn btn-primary">
                                 <span>Update Credentials</span>
                                 <span class="material-symbols-outlined">save</span>
                             </button>
                         </div>
                     </form>
+                </div>
+
+                <div class="data-card" style="max-width: 680px;">
+                    <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem;">Platform Preferences</h3>
+                    <p style="font-size: 0.9rem; color: var(--primary-70); margin-bottom: 1.5rem;">Tenant-wide governance and notification defaults.</p>
+
+                    <div class="form-group">
+                        <label class="form-label">Default Assessment Visibility</label>
+                        <select class="form-control">
+                            <option>Client users see own entity only</option>
+                            <option>Client users see all group entities</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Critical Risk Escalation Email</label>
+                        <input type="email" class="form-control" value="risk-committee@stackly.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Two-Factor Enforcement</label>
+                        <select class="form-control">
+                            <option>Required for all administrators</option>
+                            <option>Required for administrators and auditors</option>
+                            <option>Optional</option>
+                        </select>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; margin-top: 2rem;" class="form-row-inline">
+                        <button type="button" class="btn btn-primary">
+                            <span>Save Preferences</span>
+                            <span class="material-symbols-outlined">save</span>
+                        </button>
+                    </div>
                 </div>
             </div>
 

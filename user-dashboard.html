@@ -36,6 +36,11 @@
         .dashboard-tab-pane.active { display: block; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* Mobile topbar: hamburger + brand + notification icon only */
+        @media (max-width: 768px) {
+            .topbar-bell { display: inline-flex !important; }
+        }
+
         /* Responsive helpers for dashboard sections */
         .dashboard-split-grid {
             display: grid;
@@ -121,30 +126,39 @@
         <main class="dashboard-main">
             <!-- TOPBAR -->
             <header class="dashboard-topbar">
-                <div style="display: flex; align-items: center; gap: 1rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem; min-width: 0;">
                     <button type="button" class="dashboard-sidebar-toggle" style="background: none; border: none; cursor: pointer; color: var(--primary);" aria-label="Toggle Navigation">
                         <span class="material-symbols-outlined" style="font-size: 28px;">menu</span>
                     </button>
-                    <div>
+                    <div class="topbar-mobile-brand">
+                        <span class="material-symbols-outlined">shield</span>
+                        <span>STACKLY</span>
+                    </div>
+                    <div class="topbar-title" style="min-width: 0;">
                         <h2 style="font-size: 1.3rem; color: var(--primary);">Enterprise Portfolio Overview</h2>
                         <span style="font-size: 0.8rem; color: var(--primary-70);">Entity: Horizon Global Holdings LLC | Active Audit: FY26 Q1</span>
                     </div>
                 </div>
 
-                <div style="display: flex; align-items: center; gap: 1.5rem;">
-                    <div style="display: flex; align-items: center; gap: 0.5rem; background: var(--accent); padding: 0.4rem 0.85rem; border-radius: 50px; font-size: 0.82rem; font-weight: 700; color: var(--primary); border: 1px solid var(--primary-15);">
+                <div class="topbar-actions" style="display: flex; align-items: center; gap: 1.5rem;">
+                    <div class="topbar-role-badge" style="display: flex; align-items: center; gap: 0.5rem; background: var(--accent); padding: 0.4rem 0.85rem; border-radius: 50px; font-size: 0.82rem; font-weight: 700; color: var(--primary); border: 1px solid var(--primary-15);">
                         <span class="material-symbols-outlined" style="color: var(--secondary); font-size: 18px;">verified</span>
                         <span>Role: <strong class="sync-user-role">User</strong></span>
                     </div>
 
-                    <a href="./index.html" class="btn-text" style="font-size: 0.85rem;">
+                    <a href="./index.html" class="btn-text topbar-public-link" style="font-size: 0.85rem;">
                         <span class="material-symbols-outlined">home</span>
                         <span>Public Website</span>
                     </a>
 
-                    <button type="button" onclick="stacklyLogout();" class="btn btn-secondary" style="padding: 0.45rem 1rem; font-size: 0.85rem;">
+                    <button type="button" onclick="stacklyLogout();" class="btn btn-secondary topbar-signout" style="padding: 0.45rem 1rem; font-size: 0.85rem;">
                         <span class="material-symbols-outlined">logout</span>
                         <span>Sign Out</span>
+                    </button>
+
+                    <button type="button" class="topbar-bell" aria-label="Notifications" onclick="stacklyTopbarBell();" style="display: none; background: none; border: 1px solid var(--primary-15); border-radius: 50%; width: 40px; height: 40px; align-items: center; justify-content: center; cursor: pointer; color: var(--primary); position: relative;">
+                        <span class="material-symbols-outlined" style="font-size: 22px;">notifications</span>
+                        <span style="position: absolute; top: 8px; right: 9px; width: 8px; height: 8px; border-radius: 50%; background: var(--secondary);"></span>
                     </button>
                 </div>
             </header>
@@ -440,6 +454,37 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="data-card">
+                    <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem;">Report Download History</h3>
+                    <p style="font-size: 0.9rem; color: var(--primary-70); margin-bottom: 1.5rem;">Previously issued documents retained in your portal archive.</p>
+                    <div class="data-table-wrap">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Document</th>
+                                    <th>Issued</th>
+                                    <th>Format</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Q4 2025 Board Audit Pack</td>
+                                    <td>Jan 12, 2026</td>
+                                    <td>PDF (3.9 MB)</td>
+                                    <td><a href="./404.html" class="btn-text">Re-download</a></td>
+                                </tr>
+                                <tr>
+                                    <td>FY25 Cyber Resilience Benchmark</td>
+                                    <td>Dec 03, 2025</td>
+                                    <td>PDF (2.4 MB)</td>
+                                    <td><a href="./404.html" class="btn-text">Re-download</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 
             <!-- TAB 4: RISK PROFILE / MATRIX -->
@@ -636,6 +681,37 @@
                             </button>
                         </div>
                     </form>
+                </div>
+
+                <div class="data-card" style="max-width: 680px;">
+                    <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem;">Security &amp; Sessions</h3>
+                    <p style="font-size: 0.9rem; color: var(--primary-70); margin-bottom: 1.5rem;">Manage your password and sign-in protection.</p>
+
+                    <div class="form-group">
+                        <label class="form-label">Current Password</label>
+                        <input type="password" class="form-control" placeholder="Enter current password">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">New Password</label>
+                        <input type="password" class="form-control" placeholder="Minimum 10 characters">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Two-Factor Authentication</label>
+                        <select class="form-control">
+                            <option>Enabled (authenticator app)</option>
+                            <option>Enabled (email codes)</option>
+                            <option>Disabled</option>
+                        </select>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; margin-top: 2rem;" class="form-row-inline">
+                        <button type="button" class="btn btn-primary">
+                            <span>Update Security</span>
+                            <span class="material-symbols-outlined">lock</span>
+                        </button>
+                    </div>
                 </div>
             </div>
 

@@ -304,3 +304,18 @@ function initMobileSidebar() {
     // Expose so the tab handler closes the drawer with the overlay too
     window.stacklyCloseSidebar = closeSidebar;
 }
+
+/* --- 8. TOPBAR NOTIFICATION SHORTCUT (mobile bell icon) --- */
+window.stacklyTopbarBell = function () {
+    // Activate the Notifications tab via its sidebar link
+    const notificationsLink = document.querySelector('.dashboard-sidebar .sidebar-link[data-tab="notifications"]');
+    if (notificationsLink) {
+        notificationsLink.click();
+    }
+
+    // Reset the main column scroll to the top of the section
+    const scroller = document.querySelector('.dashboard-main');
+    if (scroller) {
+        scroller.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+};
