@@ -77,9 +77,13 @@ function initDashboardTabs() {
             });
 
             // On mobile, close sidebar after clicking
-            const sidebar = document.querySelector('.dashboard-sidebar');
-            if (sidebar && window.innerWidth <= 1024) {
-                sidebar.classList.remove('open');
+            if (window.innerWidth <= 1024) {
+                if (typeof window.stacklyCloseSidebar === 'function') {
+                    window.stacklyCloseSidebar();
+                } else {
+                    const sidebar = document.querySelector('.dashboard-sidebar');
+                    if (sidebar) sidebar.classList.remove('open');
+                }
             }
         });
     });
@@ -249,13 +253,54 @@ function initSettingsForm() {
     });
 }
 
-/* --- 7. MOBILE SIDEBAR TOGGLE --- */
+/* --- 7. MOBILE SIDEBAR TOGGLE (off-canvas drawer + overlay) --- */
 function initMobileSidebar() {
     const toggleBtn = document.querySelector('.dashboard-sidebar-toggle');
     const sidebar = document.querySelector('.dashboard-sidebar');
     if (!toggleBtn || !sidebar) return;
 
+    // One shared backdrop element per dashboard page
+    let overlay = document.querySelector('.sidebar-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.className = 'sidebar-overlay';
+        document.body.appendChild(overlay);
+    }
+
+    const isMobile = () => window.innerWidth <= 1024;
+
+    const openSidebar = () => {
+        sidebar.classList.add('open');
+        overlay.classList.add('show');
+        // Double rAF so the display toggle lands before the opacity transition
+        requestAnimationFrame(() => requestAnimationFrame(() => overlay.classList.add('visible')));
+        document.body.classList.add('sidebar-open');
+    };
+
+    const closeSidebar = () => {
+        sidebar.classList.remove('open');
+        document.body.classList.remove('sidebar-open');
+        overlay.classList.remove('visible');
+        setTimeout(() => overlay.classList.remove('show'), 300);
+    };
+
     toggleBtn.addEventListener('click', () => {
-        sidebar.classList.toggle('open');
+        sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
     });
+
+    // Click on the dark backdrop closes the drawer
+    overlay.addEventListener('click', closeSidebar);
+
+    // Escape key closes the drawer
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && sidebar.classList.contains('open')) closeSidebar();
+    });
+
+    // Returning to desktop width resets the drawer state cleanly
+    window.addEventListener('resize', () => {
+        if (!isMobile() && sidebar.classList.contains('open')) closeSidebar();
+    });
+
+    // Expose so the tab handler closes the drawer with the overlay too
+    window.stacklyCloseSidebar = closeSidebar;
 }

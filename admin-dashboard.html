@@ -28,6 +28,45 @@
         .dashboard-tab-pane { display: none; }
         .dashboard-tab-pane.active { display: block; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Responsive helpers for dashboard sections */
+        .dashboard-split-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        .dashboard-tile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+        .dashboard-tile {
+            border: 1px solid var(--primary-15);
+            padding: 1.5rem;
+            border-radius: 6px;
+            background: var(--accent-20);
+        }
+        .dashboard-tile .material-symbols-outlined {
+            font-size: 30px;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        .dashboard-tile h4 {
+            font-size: 1.05rem;
+            margin-bottom: 0.35rem;
+            color: var(--primary);
+        }
+        .dashboard-tile p {
+            font-size: 0.85rem;
+            color: var(--primary-70);
+        }
+        @media (max-width: 768px) {
+            .dashboard-split-grid { gap: 1.25rem; }
+            .notif-item { flex-direction: column; align-items: flex-start !important; gap: 0.75rem !important; }
+            .notif-item .badge-risk { align-self: flex-start; }
+            .cat-item { flex-direction: column !important; align-items: flex-start !important; gap: 0.5rem !important; }
+        }
     </style>
 </head>
 <body data-dashboard-type="admin">
@@ -104,7 +143,7 @@
             <!-- TOPBAR -->
             <header class="dashboard-topbar">
                 <div style="display: flex; align-items: center; gap: 1rem;">
-                    <button type="button" class="dashboard-sidebar-toggle" style="display: none; background: none; border: none; cursor: pointer; color: var(--primary);" aria-label="Toggle Navigation">
+                    <button type="button" class="dashboard-sidebar-toggle" style="background: none; border: none; cursor: pointer; color: var(--primary);" aria-label="Toggle Navigation">
                         <span class="material-symbols-outlined" style="font-size: 28px;">menu</span>
                     </button>
                     <div>
@@ -177,9 +216,9 @@
                 </div>
 
                 <!-- ADMIN CHARTS & GLOBAL MATRIX -->
-                <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 2rem; margin-bottom: 2.5rem;">
+                <div class="dashboard-split-grid">
                     <!-- Sector Exposure Breakdown Chart -->
-                    <div class="data-card" style="margin-bottom: 0;">
+                    <div class="data-card" style="margin-bottom: 0; min-width: 0;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
                             <h3 style="font-size: 1.15rem; color: var(--primary);">Global Exposure Distribution by Practice</h3>
                             <span class="badge-risk badge-low">All 240 Accounts</span>
@@ -215,7 +254,7 @@
                     </div>
 
                     <!-- Interactive Admin Risk Matrix -->
-                    <div class="data-card" style="margin-bottom: 0;">
+                    <div class="data-card" style="margin-bottom: 0; min-width: 0;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                             <h3 style="font-size: 1.15rem; color: var(--primary);">Global Threat Matrix</h3>
                             <span style="font-size: 0.78rem; color: var(--primary-70);">Impact vs Likelihood</span>
@@ -238,7 +277,7 @@
                             <h3 style="font-size: 1.15rem; color: var(--primary);">Client Portfolio &amp; Assessment Management</h3>
                             <span style="font-size: 0.82rem; color: var(--primary-70);">Live triage of enterprise clients and advisory deliverables</span>
                         </div>
-                        <input type="text" id="table-search-input" placeholder="Search client or auditor..." class="form-control" style="padding: 0.5rem 0.85rem; width: 240px; font-size: 0.85rem;">
+                        <input type="text" id="table-search-input" placeholder="Search client or auditor..." class="form-control" style="padding: 0.5rem 0.85rem; width: 240px; max-width: 100%; font-size: 0.85rem;">
                     </div>
 
                     <div class="data-table-wrap">
@@ -334,6 +373,40 @@
                         </table>
                     </div>
                 </div>
+
+                <div class="data-card">
+                    <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem;">Pending Access Requests</h3>
+                    <p style="font-size: 0.9rem; color: var(--primary-70); margin-bottom: 1.5rem;">Provisioning requests awaiting administrator approval.</p>
+                    <div class="data-table-wrap">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Requester</th>
+                                    <th>Organization</th>
+                                    <th>Requested Tier</th>
+                                    <th>Request Date</th>
+                                    <th>Decision</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Karl Lind</strong></td>
+                                    <td>Nordic Industrial Logistics</td>
+                                    <td>Corporate Client</td>
+                                    <td>Sep 18, 2026</td>
+                                    <td><button type="button" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.8rem;">Review</button></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Priya Nair</strong></td>
+                                    <td>Vanguard Capital Partners</td>
+                                    <td>Enterprise User</td>
+                                    <td>Sep 20, 2026</td>
+                                    <td><button type="button" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.8rem;">Review</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 
             <!-- TAB 3: ASSESSMENTS -->
@@ -341,11 +414,51 @@
                 <div class="data-card">
                     <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem;">Global Assessment Pipeline</h3>
                     <p style="font-size: 0.9rem; color: var(--primary-70); margin-bottom: 1.5rem;">Manage workflow milestones and sign-off verification.</p>
-                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
                         <button type="button" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
                             <span class="material-symbols-outlined">add</span>
                             <span>Initiate New Audit</span>
                         </button>
+                        <button type="button" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                            <span class="material-symbols-outlined">filter_alt</span>
+                            <span>Filter Pipeline</span>
+                        </button>
+                    </div>
+                    <div class="data-table-wrap">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Audit Code</th>
+                                    <th>Client</th>
+                                    <th>Current Milestone</th>
+                                    <th>Due Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>CYB-2026-14</td>
+                                    <td>Horizon Global Holdings</td>
+                                    <td>Penetration Test Fieldwork</td>
+                                    <td>Oct 02, 2026</td>
+                                    <td><span class="badge-risk badge-critical">Remediating</span></td>
+                                </tr>
+                                <tr>
+                                    <td>FIN-2026-09</td>
+                                    <td>Vanguard Capital Partners</td>
+                                    <td>Liquidity Review Sign-Off</td>
+                                    <td>Oct 11, 2026</td>
+                                    <td><span class="badge-risk badge-moderate">Under Review</span></td>
+                                </tr>
+                                <tr>
+                                    <td>SOC-2026-03</td>
+                                    <td>Apex Cloud Systems</td>
+                                    <td>Evidence Collection</td>
+                                    <td>Nov 05, 2026</td>
+                                    <td><span class="badge-risk badge-low">On Track</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -356,19 +469,44 @@
                     <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem;">Risk Taxonomy &amp; Categories</h3>
                     <p style="font-size: 0.9rem; color: var(--primary-70); margin-bottom: 1.5rem;">Standardized scoring bands and actuarial definitions.</p>
                     <ul style="display: flex; flex-direction: column; gap: 0.75rem;">
-                        <li style="background: var(--accent); padding: 1rem; border-radius: 4px; display: flex; justify-content: space-between;">
+                        <li class="cat-item" style="background: var(--accent); padding: 1rem; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;">
                             <strong>Enterprise Risk Management (ERM)</strong>
                             <span class="badge-risk badge-low">6 Active Controls</span>
                         </li>
-                        <li style="background: var(--accent); padding: 1rem; border-radius: 4px; display: flex; justify-content: space-between;">
+                        <li class="cat-item" style="background: var(--accent); padding: 1rem; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;">
                             <strong>Cyber &amp; Infrastructure Security</strong>
                             <span class="badge-risk badge-critical">14 Active Controls</span>
                         </li>
-                        <li style="background: var(--accent); padding: 1rem; border-radius: 4px; display: flex; justify-content: space-between;">
+                        <li class="cat-item" style="background: var(--accent); padding: 1rem; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;">
                             <strong>Financial Liquidity &amp; FX Volatility</strong>
                             <span class="badge-risk badge-moderate">8 Active Controls</span>
                         </li>
                     </ul>
+                </div>
+
+                <div class="data-card">
+                    <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem;">Category Administration</h3>
+                    <p style="font-size: 0.9rem; color: var(--primary-70); margin-bottom: 1.5rem;">Create, archive, or reweight scoring bands across the taxonomy.</p>
+                    <div class="dashboard-tile-grid">
+                        <div class="dashboard-tile">
+                            <span class="material-symbols-outlined">add_circle</span>
+                            <h4>Register New Category</h4>
+                            <p>Define a scoring band, weighting model, and escalation owner.</p>
+                            <button type="button" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.5rem 1rem;">Create Category</button>
+                        </div>
+                        <div class="dashboard-tile">
+                            <span class="material-symbols-outlined">history</span>
+                            <h4>Audit Category History</h4>
+                            <p>Review reweighting decisions and effective dating for prior quarters.</p>
+                            <button type="button" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.5rem 1rem;">Open History</button>
+                        </div>
+                        <div class="dashboard-tile">
+                            <span class="material-symbols-outlined">archive</span>
+                            <h4>Archive Legacy Bands</h4>
+                            <p>Retire superseded taxonomy entries without breaking audit lineage.</p>
+                            <button type="button" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.5rem 1rem;">View Archived</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -377,6 +515,26 @@
                 <div class="data-card">
                     <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem;">Master Governance Audit Exports</h3>
                     <p style="font-size: 0.9rem; color: var(--primary-70); margin-bottom: 1.5rem;">Download consolidated multi-tenant oversight dossiers.</p>
+                    <div class="dashboard-tile-grid">
+                        <div class="dashboard-tile">
+                            <span class="material-symbols-outlined">picture_as_pdf</span>
+                            <h4>Q3 2026 Multi-Tenant Oversight Pack</h4>
+                            <p>Cross-client exposure summary with board-ready annexes.</p>
+                            <a href="./404.html" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.5rem 1rem;">Download PDF</a>
+                        </div>
+                        <div class="dashboard-tile">
+                            <span class="material-symbols-outlined">table_view</span>
+                            <h4>Compliance Ledger Extract (CSV)</h4>
+                            <p>Full control-by-control certification ledger for regulators.</p>
+                            <a href="./404.html" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.5rem 1rem;">Download CSV</a>
+                        </div>
+                        <div class="dashboard-tile">
+                            <span class="material-symbols-outlined">schedule_send</span>
+                            <h4>Scheduled Board Distribution</h4>
+                            <p>Automated quarterly dispatch to committee mailing lists.</p>
+                            <a href="./404.html" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.5rem 1rem;">Manage Schedule</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -385,6 +543,61 @@
                 <div class="data-card">
                     <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem;">Statutory &amp; Regulatory Benchmarks</h3>
                     <p style="font-size: 0.9rem; color: var(--primary-70); margin-bottom: 1.5rem;">Institutional readiness indices across jurisdictions.</p>
+                    <div class="data-table-wrap">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Framework</th>
+                                    <th>Jurisdiction</th>
+                                    <th>Readiness Index</th>
+                                    <th>Next Review</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>SOC 2 Type II</td>
+                                    <td>United States</td>
+                                    <td>97%</td>
+                                    <td>Dec 2026</td>
+                                    <td><span class="badge-risk badge-low">Compliant</span></td>
+                                </tr>
+                                <tr>
+                                    <td>EU AI Governance Act</td>
+                                    <td>European Union</td>
+                                    <td>88%</td>
+                                    <td>Jan 2027</td>
+                                    <td><span class="badge-risk badge-moderate">Gap Remediation</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Basel IV Liquidity</td>
+                                    <td>Global</td>
+                                    <td>99%</td>
+                                    <td>Mar 2027</td>
+                                    <td><span class="badge-risk badge-low">Compliant</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem;">Attestation Workflows</h3>
+                    <p style="font-size: 0.9rem; color: var(--primary-70); margin-bottom: 1.5rem;">Route control attestations to accountable officers.</p>
+                    <div class="dashboard-tile-grid">
+                        <div class="dashboard-tile">
+                            <span class="material-symbols-outlined">approval</span>
+                            <h4>Pending Attestations</h4>
+                            <p>4 controls awaiting officer sign-off this quarter.</p>
+                            <a href="./404.html" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.5rem 1rem;">Review Queue</a>
+                        </div>
+                        <div class="dashboard-tile">
+                            <span class="material-symbols-outlined">gavel</span>
+                            <h4>Regulator Correspondence</h4>
+                            <p>Track inquiries and statutory response deadlines.</p>
+                            <a href="./404.html" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.5rem 1rem;">Open Register</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -393,6 +606,47 @@
                 <div class="data-card">
                     <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem;">Predictive Macro Volatility Simulations</h3>
                     <p style="font-size: 0.9rem; color: var(--primary-70); margin-bottom: 1.5rem;">Real-time computational modeling across interest rates, tariffs, and cyber threats.</p>
+                    <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); margin-bottom: 0;">
+                        <div class="stat-card" style="padding: 1.25rem;">
+                            <div>
+                                <div class="stat-val">0.42</div>
+                                <div class="stat-title">Volatility Beta</div>
+                            </div>
+                        </div>
+                        <div class="stat-card" style="padding: 1.25rem;">
+                            <div>
+                                <div class="stat-val">6.8%</div>
+                                <div class="stat-title">Tariff Shock Delta</div>
+                            </div>
+                        </div>
+                        <div class="stat-card" style="padding: 1.25rem;">
+                            <div>
+                                <div class="stat-val">14d</div>
+                                <div class="stat-title">Forecast Horizon</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <h3 style="font-size: 1.15rem; color: var(--primary); margin-bottom: 1.25rem;">Model Confidence by Threat Vector</h3>
+                    <div class="chart-container" style="border-top: none; margin-top: 0; padding-top: 0;">
+                        <div class="bar-row">
+                            <span class="bar-label" style="color: var(--primary);">Cyber Intrusion</span>
+                            <div class="bar-track" style="background: var(--accent);"><div class="bar-fill" style="width: 81%;"></div></div>
+                            <span class="bar-val" style="color: var(--primary);">81%</span>
+                        </div>
+                        <div class="bar-row">
+                            <span class="bar-label" style="color: var(--primary);">Rate Volatility</span>
+                            <div class="bar-track" style="background: var(--accent);"><div class="bar-fill" style="width: 64%;"></div></div>
+                            <span class="bar-val" style="color: var(--primary);">64%</span>
+                        </div>
+                        <div class="bar-row">
+                            <span class="bar-label" style="color: var(--primary);">Supply Shock</span>
+                            <div class="bar-track" style="background: var(--accent);"><div class="bar-fill" style="width: 57%;"></div></div>
+                            <span class="bar-val" style="color: var(--primary);">57%</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -401,6 +655,41 @@
                 <div class="data-card">
                     <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem;">Administrative Event Logs</h3>
                     <p style="font-size: 0.9rem; color: var(--primary-70); margin-bottom: 1.5rem;">Audit committee sign-offs and security escalation pings.</p>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <div class="notif-item" style="background: var(--accent); padding: 1.25rem; border-radius: 6px; border-left: 4px solid var(--secondary); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+                            <div>
+                                <div style="font-weight: 700; color: var(--primary);">Committee Sign-Off Received: SOC 2 Evidence Pack</div>
+                                <div style="font-size: 0.85rem; color: var(--primary-70); margin-top: 2px;">Countersigned by E. Rostova. Archived to the compliance vault.</div>
+                            </div>
+                            <span class="badge-risk badge-low">Logged</span>
+                        </div>
+                        <div class="notif-item" style="background: var(--accent); padding: 1.25rem; border-radius: 6px; border-left: 4px solid var(--primary); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+                            <div>
+                                <div style="font-weight: 700; color: var(--primary);">Escalation Ping: Critical Exposure on Horizon Global</div>
+                                <div style="font-size: 0.85rem; color: var(--primary-70); margin-top: 2px;">Ransomware tabletop result exceeded appetite threshold. CISO notified.</div>
+                            </div>
+                            <span class="badge-risk badge-critical">Escalated</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem;">Broadcast Administration</h3>
+                    <p style="font-size: 0.9rem; color: var(--primary-70); margin-bottom: 1.5rem;">Dispatch system-wide notices to tenant administrators.</p>
+                    <div class="dashboard-tile-grid">
+                        <div class="dashboard-tile">
+                            <span class="material-symbols-outlined">campaign</span>
+                            <h4>New Broadcast</h4>
+                            <p>Compose a maintenance or policy notice for all client portals.</p>
+                            <button type="button" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.5rem 1rem;">Compose</button>
+                        </div>
+                        <div class="dashboard-tile">
+                            <span class="material-symbols-outlined">mark_email_read</span>
+                            <h4>Delivery Report</h4>
+                            <p>Review open rates and acknowledgment status by tenant.</p>
+                            <button type="button" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.5rem 1rem;">View Report</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 

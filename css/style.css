@@ -1968,13 +1968,21 @@ html.js .fade-up:not(.anim-active) {
     background: var(--accent);
 }
 
+/* Fixed sidebar: stays pinned to the viewport; only its nav list scrolls.
+   The page content scrolls independently beside it. */
 .dashboard-sidebar {
     width: 280px;
+    height: 100vh;
+    height: 100dvh; /* respects mobile browser URL bars */
+    position: fixed;
+    top: 0;
+    left: 0;
     background: var(--primary);
     color: var(--accent);
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
+    overflow: hidden;
     transition: transform 0.3s ease;
     z-index: 100;
 }
@@ -1982,6 +1990,7 @@ html.js .fade-up:not(.anim-active) {
 .sidebar-brand {
     padding: 2rem 1.75rem;
     border-bottom: 1px solid var(--secondary-20);
+    flex-shrink: 0;
 }
 
 .sidebar-nav {
@@ -1990,6 +1999,20 @@ html.js .fade-up:not(.anim-active) {
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(200, 155, 60, 0.35) transparent;
+}
+
+.sidebar-nav::-webkit-scrollbar {
+    width: 5px;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+    background: rgba(200, 155, 60, 0.35);
+    border-radius: 4px;
 }
 
 .sidebar-link {
@@ -2017,6 +2040,7 @@ html.js .fade-up:not(.anim-active) {
 .sidebar-footer {
     padding: 1.5rem;
     border-top: 1px solid var(--secondary-20);
+    flex-shrink: 0;
 }
 
 .sidebar-user {
@@ -2051,9 +2075,38 @@ html.js .fade-up:not(.anim-active) {
 
 .dashboard-main {
     flex-grow: 1;
+    min-width: 0;
+    margin-left: 280px;
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
+}
+
+/* Click-away backdrop shown when the sidebar drawer is open on mobile/tablet */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 20, 33, 0.55);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 95;
+}
+
+.sidebar-overlay.visible {
+    opacity: 1;
+}
+
+body.sidebar-open {
+    overflow: hidden;
+}
+
+/* Hamburger only appears when the sidebar is an off-canvas drawer */
+.dashboard-sidebar-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
 }
 
 .dashboard-topbar {
@@ -2125,6 +2178,7 @@ html.js .fade-up:not(.anim-active) {
 
 .data-table-wrap {
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     margin-top: 1.5rem;
 }
 
@@ -2142,6 +2196,7 @@ html.js .fade-up:not(.anim-active) {
     font-family: var(--font-heading);
     font-weight: 700;
     border-bottom: 2px solid var(--primary-15);
+    white-space: nowrap;
 }
 
 .data-table td {
@@ -2373,12 +2428,8 @@ html.js .fade-up:not(.anim-active) {
     .industries-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    .dashboard-layout {
-        flex-direction: column;
-    }
-    .dashboard-sidebar {
-        width: 100%;
-    }
+    /* Dashboard responsive behavior lives in the dedicated block
+       near the dashboard styles (off-canvas drawer + overlay). */
 }
 
 @media (max-width: 768px) {
@@ -3232,5 +3283,74 @@ body.preloading {
     }
     .about-hero::before {
         background-attachment: scroll;
+    }
+}
+
+/* ==========================================================================
+   19. DASHBOARD RESPONSIVE LAYER (User & Admin)
+   Loaded last so it wins the cascade over the global media queries.
+   Mobile/tablet: sidebar becomes an off-canvas drawer; content takes the
+   full width and scrolls with the page. Only the drawer's own nav list
+   scrolls internally. Desktop: sidebar is fixed; content scrolls beside it.
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .dashboard-sidebar {
+        transform: translateX(-100%);
+        box-shadow: 0 0 30px rgba(10, 20, 33, 0.35);
+    }
+    .dashboard-sidebar.open {
+        transform: translateX(0);
+    }
+    .dashboard-main {
+        margin-left: 0;
+    }
+    .dashboard-sidebar-toggle {
+        display: inline-flex !important;
+    }
+    .sidebar-overlay.show {
+        display: block;
+    }
+    body.sidebar-open .sidebar-overlay {
+        opacity: 1;
+    }
+    .dashboard-topbar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+    }
+    /* Side-by-side chart/matrix rows collapse to a single column.
+       (.stats-grid already collapses via the base media queries above.) */
+    .dashboard-split-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-topbar {
+        height: auto;
+        min-height: 74px;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+    .data-card {
+        padding: 1.25rem;
+    }
+    .data-table th,
+    .data-table td {
+        padding: 0.7rem 0.85rem;
+        font-size: 0.85rem;
+    }
+    .stat-card {
+        padding: 1.25rem;
+    }
+    .interactive-risk-matrix .matrix-cell-interactive {
+        height: 30px;
+        font-size: 0.62rem;
+    }
+    .bar-label {
+        width: 96px;
+        font-size: 0.72rem;
     }
 }

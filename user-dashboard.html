@@ -35,6 +35,21 @@
         .dashboard-tab-pane { display: none; }
         .dashboard-tab-pane.active { display: block; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Responsive helpers for dashboard sections */
+        .dashboard-split-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        @media (max-width: 768px) {
+            .dashboard-split-grid { gap: 1.25rem; }
+            .notif-item { flex-direction: column; align-items: flex-start !important; gap: 0.75rem !important; }
+            .notif-item .badge-risk { align-self: flex-start; }
+            .form-row-inline { flex-direction: column !important; }
+            .form-row-inline .btn { width: 100%; justify-content: center; }
+        }
     </style>
 </head>
 <body data-dashboard-type="user">
@@ -107,7 +122,7 @@
             <!-- TOPBAR -->
             <header class="dashboard-topbar">
                 <div style="display: flex; align-items: center; gap: 1rem;">
-                    <button type="button" class="dashboard-sidebar-toggle" style="display: none; background: none; border: none; cursor: pointer; color: var(--primary);" aria-label="Toggle Navigation">
+                    <button type="button" class="dashboard-sidebar-toggle" style="background: none; border: none; cursor: pointer; color: var(--primary);" aria-label="Toggle Navigation">
                         <span class="material-symbols-outlined" style="font-size: 28px;">menu</span>
                     </button>
                     <div>
@@ -172,9 +187,9 @@
                 </div>
 
                 <!-- CHARTS & RISK MATRIX ROW -->
-                <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 2rem; margin-bottom: 2.5rem;">
+                <div class="dashboard-split-grid">
                     <!-- Pure Canvas / CSS Risk Gauge & Metrics -->
-                    <div class="data-card" style="margin-bottom: 0;">
+                    <div class="data-card" style="margin-bottom: 0; min-width: 0;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
                             <h3 style="font-size: 1.15rem; color: var(--primary);">Composite Exposure Posture</h3>
                             <span class="badge-risk badge-moderate">Acceptable Margin</span>
@@ -210,13 +225,13 @@
                     </div>
 
                     <!-- Interactive 5x5 Heat Matrix -->
-                    <div class="data-card" style="margin-bottom: 0;">
+                    <div class="data-card" style="margin-bottom: 0; min-width: 0;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                             <h3 style="font-size: 1.15rem; color: var(--primary);">Interactive Risk Matrix (5x5)</h3>
                             <span style="font-size: 0.78rem; color: var(--primary-70);">Click cell for telemetry</span>
                         </div>
                         <div style="font-size: 0.8rem; color: var(--primary-70); margin-bottom: 0.75rem;">
-                            Impact (Vertical 5-1) &times; Likelihood (Horizontal 1-5)
+                            Impact &times; Likelihood
                         </div>
 
                         <div class="interactive-risk-matrix" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px;">
@@ -366,6 +381,37 @@
                         </table>
                     </div>
                 </div>
+
+                <div class="data-card">
+                    <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem;">Scheduled &amp; Upcoming Audits</h3>
+                    <p style="font-size: 0.9rem; color: var(--primary-70); margin-bottom: 1.5rem;">Engagements currently in planning or fieldwork phase.</p>
+                    <div class="data-table-wrap">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Scheduled Window</th>
+                                    <th>Engagement</th>
+                                    <th>Lead Auditor</th>
+                                    <th>Phase</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Mar 02 – Mar 14, 2026</td>
+                                    <td>Third-Party Vendor Risk Baseline Review</td>
+                                    <td>K. Sterling, Director</td>
+                                    <td><span class="badge-risk badge-moderate">Fieldwork</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Mar 23 – Apr 04, 2026</td>
+                                    <td>Annual Business Continuity Drill Verification</td>
+                                    <td>M. Vance, CISO</td>
+                                    <td><span class="badge-risk badge-low">Planning</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 
             <!-- TAB 3: REPORTS -->
@@ -386,6 +432,12 @@
                             <p style="font-size: 0.85rem; color: var(--primary-70); margin-bottom: 1rem;">Comparative analysis against peer sector fintech enterprises.</p>
                             <a href="./404.html" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.5rem 1rem;">Download PDF</a>
                         </div>
+                        <div style="border: 1px solid var(--primary-15); padding: 1.5rem; border-radius: 6px; background: var(--accent-20);">
+                            <span class="material-symbols-outlined" style="font-size: 32px; color: var(--secondary); margin-bottom: 0.5rem;">request_quote</span>
+                            <h4 style="font-size: 1.1rem; margin-bottom: 0.35rem;">Request Custom Report</h4>
+                            <p style="font-size: 0.85rem; color: var(--primary-70); margin-bottom: 1rem;">Commission a bespoke advisory dossier tailored to your entity.</p>
+                            <a href="./contact.html" class="btn btn-primary" style="font-size: 0.82rem; padding: 0.5rem 1rem;">Contact Advisory</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -400,6 +452,43 @@
                         <p style="font-size: 0.92rem; color: var(--primary-85); line-height: 1.65;">
                             Horizon Global maintains a low tolerance for unhedged FX exposures exceeding $5M and zero tolerance for single-tenant data breaches. Operational plant outages exceeding 4 hours require immediate C-suite escalation.
                         </p>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem;">Tolerance Bands &amp; Remediation SLAs</h3>
+                    <p style="font-size: 0.9rem; color: var(--primary-70); margin-bottom: 1.5rem;">Escalation thresholds agreed with your advisory partners.</p>
+                    <div class="data-table-wrap">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Risk Band</th>
+                                    <th>Matrix Score</th>
+                                    <th>Escalation Path</th>
+                                    <th>Remediation SLA</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge-risk badge-critical">Critical</span></td>
+                                    <td>18 – 25</td>
+                                    <td>CISO &amp; Board Risk Committee</td>
+                                    <td>72 hours</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge-risk badge-moderate">Moderate</span></td>
+                                    <td>9 – 17</td>
+                                    <td>Divisional Risk Officer</td>
+                                    <td>14 days</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge-risk badge-low">Low</span></td>
+                                    <td>1 – 8</td>
+                                    <td>Line Manager</td>
+                                    <td>Next quarterly cycle</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -436,6 +525,21 @@
                         </table>
                     </div>
                 </div>
+
+                <div class="data-card">
+                    <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem;">Archive Upload Checklist</h3>
+                    <p style="font-size: 0.9rem; color: var(--primary-70); margin-bottom: 1.5rem;">Required artifacts before each quarterly compliance review.</p>
+                    <ul style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        <li style="background: var(--accent); padding: 1rem; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                            <strong style="color: var(--primary);">Signed Cyber Incident Response Addendum</strong>
+                            <span class="badge-risk badge-low">Received</span>
+                        </li>
+                        <li style="background: var(--accent); padding: 1rem; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                            <strong style="color: var(--primary);">FY26 Disaster Recovery Test Evidence Pack</strong>
+                            <span class="badge-risk badge-moderate">Awaiting Upload</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <!-- TAB 6: NOTIFICATIONS -->
@@ -444,19 +548,40 @@
                     <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem;">System Notifications &amp; Alerts</h3>
                     <p style="font-size: 0.9rem; color: var(--primary-70); margin-bottom: 1.5rem;">Critical telemetry warnings dispatched to your role.</p>
                     <div style="display: flex; flex-direction: column; gap: 1rem;">
-                        <div style="background: var(--accent); padding: 1.25rem; border-radius: 6px; border-left: 4px solid var(--secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <div class="notif-item" style="background: var(--accent); padding: 1.25rem; border-radius: 6px; border-left: 4px solid var(--secondary); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
                             <div>
                                 <div style="font-weight: 700; color: var(--primary);">Quarterly Cloud Penetration Audit Ready for Review</div>
                                 <div style="font-size: 0.85rem; color: var(--primary-70); margin-top: 2px;">Assigned lead: Marcus Vance. 2 minor recommendations require sign-off.</div>
                             </div>
                             <span class="badge-risk badge-moderate">Pending Action</span>
                         </div>
-                        <div style="background: var(--accent); padding: 1.25rem; border-radius: 6px; border-left: 4px solid var(--primary); display: flex; justify-content: space-between; align-items: center;">
+                        <div class="notif-item" style="background: var(--accent); padding: 1.25rem; border-radius: 6px; border-left: 4px solid var(--primary); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
                             <div>
                                 <div style="font-weight: 700; color: var(--primary);">Automated Daily Risk Score Calculated (Score: 24/100)</div>
                                 <div style="font-size: 0.85rem; color: var(--primary-70); margin-top: 2px;">No anomalous fluctuations detected across financial or IT nodes.</div>
                             </div>
                             <span class="badge-risk badge-low">Informational</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem;">Active Incident Alerts</h3>
+                    <p style="font-size: 0.9rem; color: var(--primary-70); margin-bottom: 1.5rem;">Live operational events tracked against your response playbooks.</p>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <div class="notif-item" style="background: var(--accent); padding: 1.25rem; border-radius: 6px; border-left: 4px solid var(--secondary); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+                            <div>
+                                <div style="font-weight: 700; color: var(--primary);">Elevated Login Failures on VPN Gateway</div>
+                                <div style="font-size: 0.85rem; color: var(--primary-70); margin-top: 2px;">Credential-stuffing signature detected. MFA enforcement auto-applied.</div>
+                            </div>
+                            <span class="badge-risk badge-critical">Monitoring</span>
+                        </div>
+                        <div class="notif-item" style="background: var(--accent); padding: 1.25rem; border-radius: 6px; border-left: 4px solid var(--primary-40); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+                            <div>
+                                <div style="font-weight: 700; color: var(--primary);">Vendor Portal Maintenance Window Confirmed</div>
+                                <div style="font-size: 0.85rem; color: var(--primary-70); margin-top: 2px;">Scheduled downtime Sunday 02:00–04:00 EST. No exposure expected.</div>
+                            </div>
+                            <span class="badge-risk badge-low">Resolved</span>
                         </div>
                     </div>
                 </div>
@@ -487,7 +612,21 @@
                             <input type="text" class="form-control" value="Enterprise Client User" readonly style="background: var(--accent); cursor: not-allowed;">
                         </div>
 
-                        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                        <div class="form-group">
+                            <label class="form-label">Contact Number</label>
+                            <input type="tel" class="form-control" value="+1 (415) 555-0148">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Notification Preference</label>
+                            <select class="form-control">
+                                <option>Email only</option>
+                                <option>Email + SMS</option>
+                                <option>Portal only</option>
+                            </select>
+                        </div>
+
+                        <div style="display: flex; gap: 1rem; margin-top: 2rem;" class="form-row-inline">
                             <button type="submit" class="btn btn-primary">
                                 <span>Save Changes</span>
                                 <span class="material-symbols-outlined">save</span>
