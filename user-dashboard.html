@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Risk Portal | STACKLY Risk Management</title>
+    <!-- Google Fonts & Material Symbols (No SVGs, No Emojis) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        .matrix-cell-interactive {
+            height: 38px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+        .matrix-cell-interactive:hover {
+            transform: scale(1.08);
+            z-index: 10;
+            box-shadow: var(--shadow-sm);
+        }
+        .matrix-cell-interactive.selected {
+            outline: 2px solid var(--secondary);
+            transform: scale(1.06);
+        }
+        .cell-critical { background: var(--primary); color: var(--secondary); border: 1px solid var(--secondary); }
+        .cell-moderate { background: var(--secondary-40); color: var(--primary); }
+        .cell-low { background: var(--accent); color: var(--primary-70); border: 1px solid var(--primary-08); }
+        .dashboard-tab-pane { display: none; }
+        .dashboard-tab-pane.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body data-dashboard-type="user">
+
+    <div class="dashboard-layout">
+        <!-- SIDEBAR -->
+        <aside class="dashboard-sidebar" aria-label="Client Dashboard Navigation">
+            <div class="sidebar-brand">
+                <a href="./index.html" class="nav-logo">
+                    <img src="./images/logo-dark.webp" alt="STACKLY Logo" class="nav-logo-img" style="filter: brightness(0) invert(1); height: 38px;">
+                </a>
+                <div style="font-size: 0.75rem; color: var(--secondary); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 6px; font-weight: 700;">
+                    Client Portal
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#tab-overview" class="sidebar-link active" data-tab="overview">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#tab-assessments" class="sidebar-link" data-tab="assessments">
+                    <span class="material-symbols-outlined">fact_check</span>
+                    <span>Risk Assessments</span>
+                </a>
+                <a href="#tab-reports" class="sidebar-link" data-tab="reports">
+                    <span class="material-symbols-outlined">description</span>
+                    <span>My Reports</span>
+                </a>
+                <a href="#tab-matrix" class="sidebar-link" data-tab="matrix">
+                    <span class="material-symbols-outlined">grid_view</span>
+                    <span>Risk Profile</span>
+                </a>
+                <a href="#tab-documents" class="sidebar-link" data-tab="documents">
+                    <span class="material-symbols-outlined">folder</span>
+                    <span>Documents</span>
+                </a>
+                <a href="#tab-notifications" class="sidebar-link" data-tab="notifications">
+                    <span class="material-symbols-outlined">notifications</span>
+                    <span>Notifications</span>
+                </a>
+                <a href="#tab-settings" class="sidebar-link" data-tab="settings">
+                    <span class="material-symbols-outlined">manage_accounts</span>
+                    <span>Profile</span>
+                </a>
+                <a href="#tab-settings" class="sidebar-link" data-tab="settings">
+                    <span class="material-symbols-outlined">settings</span>
+                    <span>Settings</span>
+                </a>
+                <a href="javascript:void(0)" class="sidebar-link" onclick="stacklyLogout();" style="color: #e6b849; margin-top: auto;">
+                    <span class="material-symbols-outlined">logout</span>
+                    <span>Logout</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="sidebar-user">
+                    <div class="sidebar-user-avatar sync-user-avatar">SR</div>
+                    <div style="overflow: hidden;">
+                        <div class="sidebar-user-name sync-user-name">Shobitha Rao</div>
+                        <!-- EXACT UNTRUNCATED EMAIL DISPLAY -->
+                        <div class="sidebar-user-email sync-user-email">shobitha@gmail.com</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN DASHBOARD CONTENT -->
+        <main class="dashboard-main">
+            <!-- TOPBAR -->
+            <header class="dashboard-topbar">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <button type="button" class="dashboard-sidebar-toggle" style="display: none; background: none; border: none; cursor: pointer; color: var(--primary);" aria-label="Toggle Navigation">
+                        <span class="material-symbols-outlined" style="font-size: 28px;">menu</span>
+                    </button>
+                    <div>
+                        <h2 style="font-size: 1.3rem; color: var(--primary);">Enterprise Portfolio Overview</h2>
+                        <span style="font-size: 0.8rem; color: var(--primary-70);">Entity: Horizon Global Holdings LLC | Active Audit: FY26 Q1</span>
+                    </div>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 1.5rem;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; background: var(--accent); padding: 0.4rem 0.85rem; border-radius: 50px; font-size: 0.82rem; font-weight: 700; color: var(--primary); border: 1px solid var(--primary-15);">
+                        <span class="material-symbols-outlined" style="color: var(--secondary); font-size: 18px;">verified</span>
+                        <span>Role: <strong class="sync-user-role">User</strong></span>
+                    </div>
+
+                    <a href="./index.html" class="btn-text" style="font-size: 0.85rem;">
+                        <span class="material-symbols-outlined">home</span>
+                        <span>Public Website</span>
+                    </a>
+
+                    <button type="button" onclick="stacklyLogout();" class="btn btn-secondary" style="padding: 0.45rem 1rem; font-size: 0.85rem;">
+                        <span class="material-symbols-outlined">logout</span>
+                        <span>Sign Out</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- TAB 1: OVERVIEW -->
+            <div class="dashboard-content dashboard-tab-pane active" id="tab-overview">
+                <!-- 4 KPI CARDS -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><span class="material-symbols-outlined">speed</span></div>
+                        <div>
+                            <div class="stat-val">24<span style="font-size: 1rem; color: var(--primary-70);">/100</span></div>
+                            <div class="stat-title">Overall Risk Score</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon"><span class="material-symbols-outlined">warning</span></div>
+                        <div>
+                            <div class="stat-val">3</div>
+                            <div class="stat-title">Open Risks (Active)</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon"><span class="material-symbols-outlined">check_circle</span></div>
+                        <div>
+                            <div class="stat-val">48</div>
+                            <div class="stat-title">Resolved Exposures</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon"><span class="material-symbols-outlined">assessment</span></div>
+                        <div>
+                            <div class="stat-val">12</div>
+                            <div class="stat-title">Completed Audits</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CHARTS & RISK MATRIX ROW -->
+                <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 2rem; margin-bottom: 2.5rem;">
+                    <!-- Pure Canvas / CSS Risk Gauge & Metrics -->
+                    <div class="data-card" style="margin-bottom: 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <h3 style="font-size: 1.15rem; color: var(--primary);">Composite Exposure Posture</h3>
+                            <span class="badge-risk badge-moderate">Acceptable Margin</span>
+                        </div>
+
+                        <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; margin: 1rem 0;">
+                            <canvas id="risk-gauge-canvas"></canvas>
+                            <div style="font-family: var(--font-heading); font-size: 1.75rem; font-weight: 800; color: var(--secondary); margin-top: -30px;">
+                                78% Safe
+                            </div>
+                            <div style="font-size: 0.8rem; color: var(--primary-70); margin-top: 4px;">
+                                Lower score represents reduced corporate volatility
+                            </div>
+                        </div>
+
+                        <div style="border-top: 1px solid var(--primary-08); padding-top: 1.25rem; margin-top: 1.25rem;">
+                            <div class="bar-row">
+                                <span class="bar-label" style="color: var(--primary);">Cyber Defense</span>
+                                <div class="bar-track" style="background: var(--accent);"><div class="bar-fill" style="width: 22%;"></div></div>
+                                <span class="bar-val" style="color: var(--primary);">22%</span>
+                            </div>
+                            <div class="bar-row">
+                                <span class="bar-label" style="color: var(--primary);">Liquidity Buffer</span>
+                                <div class="bar-track" style="background: var(--accent);"><div class="bar-fill" style="width: 15%;"></div></div>
+                                <span class="bar-val" style="color: var(--primary);">15%</span>
+                            </div>
+                            <div class="bar-row">
+                                <span class="bar-label" style="color: var(--primary);">Supply Chain Hubs</span>
+                                <div class="bar-track" style="background: var(--accent);"><div class="bar-fill" style="width: 35%;"></div></div>
+                                <span class="bar-val" style="color: var(--primary);">35%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive 5x5 Heat Matrix -->
+                    <div class="data-card" style="margin-bottom: 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.15rem; color: var(--primary);">Interactive Risk Matrix (5x5)</h3>
+                            <span style="font-size: 0.78rem; color: var(--primary-70);">Click cell for telemetry</span>
+                        </div>
+                        <div style="font-size: 0.8rem; color: var(--primary-70); margin-bottom: 0.75rem;">
+                            Impact (Vertical 5-1) &times; Likelihood (Horizontal 1-5)
+                        </div>
+
+                        <div class="interactive-risk-matrix" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px;">
+                            <!-- Injected dynamically by dashboard.js -->
+                        </div>
+
+                        <!-- Matrix Click Inspection Detail -->
+                        <div id="matrix-risk-detail" style="margin-top: 1.25rem; padding: 1rem; background: var(--accent); border-radius: 6px; border: 1px solid var(--primary-15);">
+                            <div style="font-size: 0.85rem; color: var(--primary-70);">Select any matrix coordinate above to inspect active operational incident playbooks.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RECENT ASSESSMENTS TABLE -->
+                <div class="data-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                        <div>
+                            <h3 style="font-size: 1.15rem; color: var(--primary);">Recent Risk Assessments</h3>
+                            <span style="font-size: 0.82rem; color: var(--primary-70);">Verified by STACKLY Advisory Lead Partners</span>
+                        </div>
+                        <div style="position: relative;">
+                            <input type="text" id="table-search-input" placeholder="Search assessments..." class="form-control" style="padding: 0.5rem 0.85rem; width: 240px; font-size: 0.85rem;">
+                        </div>
+                    </div>
+
+                    <div class="data-table-wrap">
+                        <table class="data-table searchable-table">
+                            <thead>
+                                <tr>
+                                    <th>Audit Code</th>
+                                    <th>Practice Scope</th>
+                                    <th>Auditor Lead</th>
+                                    <th>Completion Date</th>
+                                    <th>Exposure Level</th>
+                                    <th>Audit Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>RA-2026-081</strong></td>
+                                    <td>Cloud ERP Access Control &amp; Zero-Trust</td>
+                                    <td>M. Vance, CISO</td>
+                                    <td>Feb 28, 2026</td>
+                                    <td><span class="badge-risk badge-critical">Critical Action</span></td>
+                                    <td><a href="./404.html" class="btn-text" style="font-size: 0.82rem;">Review Dossier</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>RA-2026-077</strong></td>
+                                    <td>Foreign Currency Corridor Stress Test</td>
+                                    <td>D. Chen, Principal</td>
+                                    <td>Feb 19, 2026</td>
+                                    <td><span class="badge-risk badge-moderate">Moderate</span></td>
+                                    <td><a href="./404.html" class="btn-text" style="font-size: 0.82rem;">Review Dossier</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>RA-2026-064</strong></td>
+                                    <td>EU AI Governance Act Operational Readiness</td>
+                                    <td>E. Rostova, Partner</td>
+                                    <td>Jan 31, 2026</td>
+                                    <td><span class="badge-risk badge-low">Compliant</span></td>
+                                    <td><a href="./404.html" class="btn-text" style="font-size: 0.82rem;">Review Dossier</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>RA-2026-052</strong></td>
+                                    <td>Tier-1 Logistics Hub Dual-Failover Verification</td>
+                                    <td>K. Sterling, Director</td>
+                                    <td>Jan 14, 2026</td>
+                                    <td><span class="badge-risk badge-low">Verified</span></td>
+                                    <td><a href="./404.html" class="btn-text" style="font-size: 0.82rem;">Review Dossier</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ACTIVITY TIMELINE -->
+                <div class="data-card">
+                    <h3 style="font-size: 1.15rem; color: var(--primary); margin-bottom: 1.25rem;">Enterprise Incident &amp; Telemetry Log</h3>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <div style="display: flex; gap: 1rem; align-items: flex-start; padding-bottom: 1rem; border-bottom: 1px solid var(--primary-08);">
+                            <span class="material-symbols-outlined" style="color: var(--secondary); font-size: 24px;">lock_clock</span>
+                            <div>
+                                <div style="font-size: 0.92rem; font-weight: 700; color: var(--primary);">Automated Vault Backup Re-Encryption Completed</div>
+                                <div style="font-size: 0.82rem; color: var(--primary-70);">Synchronized with Zurich air-gapped data facility. Hash verified with 0 discrepancies.</div>
+                                <div style="font-size: 0.75rem; color: var(--primary-40); margin-top: 2px;">Today at 04:12 EST</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 1rem; align-items: flex-start; padding-bottom: 1rem; border-bottom: 1px solid var(--primary-08);">
+                            <span class="material-symbols-outlined" style="color: var(--secondary); font-size: 24px;">policy</span>
+                            <div>
+                                <div style="font-size: 0.92rem; font-weight: 700; color: var(--primary);">SEC 10-K Risk Governance Annex Exported</div>
+                                <div style="font-size: 0.82rem; color: var(--primary-70);">Generated by user: <span class="sync-user-email">shobitha@gmail.com</span> for board review committee.</div>
+                                <div style="font-size: 0.75rem; color: var(--primary-40); margin-top: 2px;">Yesterday at 16:45 EST</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                            <span class="material-symbols-outlined" style="color: var(--secondary); font-size: 24px;">rule</span>
+                            <div>
+                                <div style="font-size: 0.92rem; font-weight: 700; color: var(--primary);">Quarterly Basel IV Liquidity Coefficient Approved</div>
+                                <div style="font-size: 0.82rem; color: var(--primary-70);">Treasury buffer confirmed at 14.8% excess margin over regulatory baseline.</div>
+                                <div style="font-size: 0.75rem; color: var(--primary-40); margin-top: 2px;">March 18, 2026</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: ASSESSMENTS -->
+            <div class="dashboard-content dashboard-tab-pane" id="tab-assessments">
+                <div class="data-card">
+                    <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem;">Corporate Risk Assessment Library</h3>
+                    <p style="font-size: 0.9rem; color: var(--primary-70); margin-bottom: 1.5rem;">Comprehensive audits conducted across enterprise divisions.</p>
+                    <div class="data-table-wrap">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Audit Identifier</th>
+                                    <th>Assessment Title</th>
+                                    <th>Evaluation Standard</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ERM-2026-01</td>
+                                    <td>Global Enterprise Risk Governance Audit</td>
+                                    <td>COSO ERM 2024</td>
+                                    <td><span class="badge-risk badge-low">Certified</span></td>
+                                    <td><a href="./404.html" class="btn-text">Download Report</a></td>
+                                </tr>
+                                <tr>
+                                    <td>CYB-2026-14</td>
+                                    <td>Zero-Trust Cloud Architecture Pen-Test</td>
+                                    <td>NIST CSF 2.0</td>
+                                    <td><span class="badge-risk badge-critical">Remediating</span></td>
+                                    <td><a href="./404.html" class="btn-text">View Findings</a></td>
+                                </tr>
+                                <tr>
+                                    <td>FIN-2026-09</td>
+                                    <td>Counterparty Solvency &amp; Liquidity Review</td>
+                                    <td>Basel IV Internal</td>
+                                    <td><span class="badge-risk badge-moderate">Under Review</span></td>
+                                    <td><a href="./404.html" class="btn-text">Review Metrics</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: REPORTS -->
+            <div class="dashboard-content dashboard-tab-pane" id="tab-reports">
+                <div class="data-card">
+                    <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem;">Executive Reports &amp; Board Packs</h3>
+                    <p style="font-size: 0.9rem; color: var(--primary-70); margin-bottom: 1.5rem;">Signed audit committee documents ready for download.</p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                        <div style="border: 1px solid var(--primary-15); padding: 1.5rem; border-radius: 6px; background: var(--accent-20);">
+                            <span class="material-symbols-outlined" style="font-size: 32px; color: var(--secondary); margin-bottom: 0.5rem;">picture_as_pdf</span>
+                            <h4 style="font-size: 1.1rem; margin-bottom: 0.35rem;">Q1 2026 Board Audit Pack</h4>
+                            <p style="font-size: 0.85rem; color: var(--primary-70); margin-bottom: 1rem;">Complete executive summary including quantitative stress simulations.</p>
+                            <a href="./404.html" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.5rem 1rem;">Download PDF</a>
+                        </div>
+                        <div style="border: 1px solid var(--primary-15); padding: 1.5rem; border-radius: 6px; background: var(--accent-20);">
+                            <span class="material-symbols-outlined" style="font-size: 32px; color: var(--secondary); margin-bottom: 0.5rem;">picture_as_pdf</span>
+                            <h4 style="font-size: 1.1rem; margin-bottom: 0.35rem;">Cyber Resilience Benchmark</h4>
+                            <p style="font-size: 0.85rem; color: var(--primary-70); margin-bottom: 1rem;">Comparative analysis against peer sector fintech enterprises.</p>
+                            <a href="./404.html" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.5rem 1rem;">Download PDF</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: RISK PROFILE / MATRIX -->
+            <div class="dashboard-content dashboard-tab-pane" id="tab-matrix">
+                <div class="data-card">
+                    <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem;">Enterprise Risk Profile</h3>
+                    <p style="font-size: 0.9rem; color: var(--primary-70); margin-bottom: 1.5rem;">Deep breakdown of current risk appetite and organizational tolerances.</p>
+                    <div style="background: var(--accent); padding: 1.5rem; border-radius: 6px; border-left: 4px solid var(--secondary);">
+                        <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Approved Risk Appetite Statement</h4>
+                        <p style="font-size: 0.92rem; color: var(--primary-85); line-height: 1.65;">
+                            Horizon Global maintains a low tolerance for unhedged FX exposures exceeding $5M and zero tolerance for single-tenant data breaches. Operational plant outages exceeding 4 hours require immediate C-suite escalation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 5: DOCUMENTS -->
+            <div class="dashboard-content dashboard-tab-pane" id="tab-documents">
+                <div class="data-card">
+                    <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem;">Confidential Vault Documents</h3>
+                    <p style="font-size: 0.9rem; color: var(--primary-70); margin-bottom: 1.5rem;">Air-gapped enterprise compliance archives.</p>
+                    <div class="data-table-wrap">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Document Name</th>
+                                    <th>Format</th>
+                                    <th>Security Tier</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>STACKLY_Mutual_NDA_Signed.pdf</td>
+                                    <td>PDF (2.1 MB)</td>
+                                    <td><span class="badge-risk badge-low">Tier 1 Restricted</span></td>
+                                    <td><a href="./404.html" class="btn-text">View Vault</a></td>
+                                </tr>
+                                <tr>
+                                    <td>FY26_Business_Continuity_Playbook.enc</td>
+                                    <td>Encrypted Archive</td>
+                                    <td><span class="badge-risk badge-critical">Executive Only</span></td>
+                                    <td><a href="./404.html" class="btn-text">View Vault</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 6: NOTIFICATIONS -->
+            <div class="dashboard-content dashboard-tab-pane" id="tab-notifications">
+                <div class="data-card">
+                    <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem;">System Notifications &amp; Alerts</h3>
+                    <p style="font-size: 0.9rem; color: var(--primary-70); margin-bottom: 1.5rem;">Critical telemetry warnings dispatched to your role.</p>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <div style="background: var(--accent); padding: 1.25rem; border-radius: 6px; border-left: 4px solid var(--secondary); display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-weight: 700; color: var(--primary);">Quarterly Cloud Penetration Audit Ready for Review</div>
+                                <div style="font-size: 0.85rem; color: var(--primary-70); margin-top: 2px;">Assigned lead: Marcus Vance. 2 minor recommendations require sign-off.</div>
+                            </div>
+                            <span class="badge-risk badge-moderate">Pending Action</span>
+                        </div>
+                        <div style="background: var(--accent); padding: 1.25rem; border-radius: 6px; border-left: 4px solid var(--primary); display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-weight: 700; color: var(--primary);">Automated Daily Risk Score Calculated (Score: 24/100)</div>
+                                <div style="font-size: 0.85rem; color: var(--primary-70); margin-top: 2px;">No anomalous fluctuations detected across financial or IT nodes.</div>
+                            </div>
+                            <span class="badge-risk badge-low">Informational</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 7: PROFILE & SETTINGS -->
+            <div class="dashboard-content dashboard-tab-pane" id="tab-settings">
+                <div class="data-card" style="max-width: 680px;">
+                    <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem;">User Profile &amp; Preferences</h3>
+                    <p style="font-size: 0.9rem; color: var(--primary-70); margin-bottom: 1.5rem;">Update your profile information. Changes persist directly across your session.</p>
+
+                    <div id="settings-status-msg" style="display: none; background: var(--secondary-20); color: var(--primary); padding: 0.75rem 1rem; border-radius: 4px; border: 1px solid var(--secondary); font-weight: 700; margin-bottom: 1.25rem;"></div>
+
+                    <form id="dashboard-settings-form">
+                        <div class="form-group">
+                            <label for="settings-name-input" class="form-label">Full Name</label>
+                            <input type="text" id="settings-name-input" class="form-control" value="Shobitha Rao" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="settings-email-input" class="form-label">Email Address (Exact full email displayed)</label>
+                            <!-- IMPORTANT: Displays untruncated email -->
+                            <input type="email" id="settings-email-input" class="form-control" value="shobitha@gmail.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Assigned Authorization Tier</label>
+                            <input type="text" class="form-control" value="Enterprise Client User" readonly style="background: var(--accent); cursor: not-allowed;">
+                        </div>
+
+                        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                            <button type="submit" class="btn btn-primary">
+                                <span>Save Changes</span>
+                                <span class="material-symbols-outlined">save</span>
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="syncUserProfile();">
+                                <span>Reset Form</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="./js/auth.js"></script>
+    <script src="./js/dashboard.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>

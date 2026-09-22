@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Insights &amp; Intelligence | STACKLY</title>
+    <meta name="description" content="Read executive briefings, risk reports, and regulatory analyses published by STACKLY risk management senior advisory partners.">
+    <!-- Google Fonts & Material Symbols (No SVGs, No Emojis) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+    <!-- PRELOADER -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <img src="./images/logo-dark.webp" alt="STACKLY Logo" class="preloader-logo">
+            <div class="preloader-bar"><span></span></div>
+            <div class="preloader-text">Securing Session</div>
+        </div>
+    </div>
+
+    <!-- STICKY HEADER -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="./index.html" class="nav-logo">
+                <img src="./images/logo-dark.webp" alt="STACKLY Logo" class="nav-logo-img">
+            </a>
+
+            <nav class="nav-menu" aria-label="Main Navigation">
+                <a href="./index.html" class="nav-link">Home</a>
+                <a href="./about.html" class="nav-link">About</a>
+                <a href="./services.html" class="nav-link">Services</a>
+                <a href="./blog.html" class="nav-link active">Blog</a>
+                <a href="./contact.html" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="./login.html" class="header-login">
+                    <span class="material-symbols-outlined">person</span>
+                    <span>Login</span>
+                </a>
+                <!-- <a href="./contact.html" class="btn btn-primary">
+                    <span>Get Started</span>
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </a> -->
+                <button type="button" class="hamburger-btn" aria-label="Open Mobile Menu">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU OVERLAY -->
+    <div class="mobile-nav-overlay" aria-hidden="true">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <a href="./index.html" class="nav-logo">
+                <img src="./images/logo-dark.webp" alt="STACKLY Logo" class="nav-logo-img" style="filter: brightness(0) invert(1);">
+            </a>
+            <button type="button" class="mobile-nav-close" style="color: var(--accent); cursor: pointer;" aria-label="Close Menu">
+                <span class="material-symbols-outlined" style="font-size: 32px;">close</span>
+            </button>
+        </div>
+        <div class="mobile-nav-links">
+            <a href="./index.html" class="mobile-nav-link">Home <span class="material-symbols-outlined">chevron_right</span></a>
+            <a href="./about.html" class="mobile-nav-link">About <span class="material-symbols-outlined">chevron_right</span></a>
+            <a href="./services.html" class="mobile-nav-link">Services <span class="material-symbols-outlined">chevron_right</span></a>
+            <a href="./blog.html" class="mobile-nav-link active">Blog <span class="material-symbols-outlined">chevron_right</span></a>
+            <a href="./contact.html" class="mobile-nav-link">Contact <span class="material-symbols-outlined">chevron_right</span></a>
+        </div>
+        <div class="mobile-nav-actions">
+            <a href="./login.html" class="btn btn-secondary" style="border-color: var(--secondary); color: var(--accent); width: 100%;">
+                <span class="material-symbols-outlined">login</span>
+                <span>Client Login</span>
+            </a>
+            <!-- <a href="./contact.html" class="btn btn-primary" style="width: 100%;">
+                <span>Get Started</span>
+                <span class="material-symbols-outlined">arrow_forward</span>
+            </a> -->
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT: EXACTLY 9 SECTIONS -->
+    <main>
+
+        <!-- 01 — BLOG HERO -->
+        <section class="section about-hero" id="blog-hero">
+            <div class="container text-center">
+                <div class="section-eyebrow">
+                    <span class="material-symbols-outlined">menu_book</span>
+                    <span>Executive Research &amp; Insights</span>
+                </div>
+                <h1 class="section-title" style="max-width: 900px; margin-left: auto; margin-right: auto;">
+                    Intellectual Capital for the Modern Risk Officer
+                </h1>
+                <p class="section-subtitle" style="margin-left: auto; margin-right: auto;">
+                    In-depth perspectives, actuarial research papers, and strategic guidance authored by STACKLY's senior enterprise advisory partners.
+                </p>
+            </div>
+        </section>
+
+        <!-- 02 — FEATURED RISK INSIGHT -->
+        <section class="section section-white" id="featured-insight">
+            <div class="container">
+                <div class="section-eyebrow">
+                    <span class="material-symbols-outlined">star</span>
+                    <span>Flagship Intelligence Paper</span>
+                </div>
+                <div class="featured-blog-card fade-up">
+                    <div style="height: 380px; overflow: hidden;">
+                        <img src="./images/blog-featured.webp" alt="Global enterprise risk landscape executive report" style="width: 100%; height: 100%; object-fit: cover;" loading="eager">
+                    </div>
+                    <div style="padding: 2.5rem; display: flex; flex-direction: column; justify-content: center;">
+                        <div class="blog-meta">Executive Report | Published Q1 2026</div>
+                        <h2 style="font-size: 1.85rem; line-height: 1.25; margin-bottom: 1rem; color: var(--primary);">
+                            The 2026 Global Enterprise Risk Landscape: Navigating Geopolitical Fracture &amp; Algorithmic Shift
+                        </h2>
+                        <p style="font-size: 0.98rem; color: var(--primary-70); line-height: 1.65; margin-bottom: 1.75rem;">
+                            A 42-page forensic study examining the compound interactions between cross-border currency controls, AI model liability, and physical supply chain bottlenecks across G20 economies.
+                        </p>
+                        <a href="./404.html" class="btn btn-primary" style="align-self: flex-start;">
+                            <span>Download Full Executive Briefing</span>
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03 — ENTERPRISE RISK -->
+        <section class="section section-accent" id="insight-erm">
+            <div class="container">
+                <div class="section-eyebrow">
+                    <span class="material-symbols-outlined">corporate_fare</span>
+                    <span>Enterprise Governance</span>
+                </div>
+                <h2 class="section-title">Enterprise Risk Perspectives</h2>
+                <div class="blog-grid">
+                    <div class="blog-card fade-up">
+                        <img src="./images/blog-erm.webp" alt="Enterprise board risk committee governance" class="blog-card-img" loading="lazy">
+                        <div class="blog-card-body">
+                            <div class="blog-meta">Enterprise Risk | Feb 18, 2026</div>
+                            <h3 class="blog-title">Modernizing the Audit Committee Charter for Extreme Shocks</h3>
+                            <p class="blog-desc">Why annual heat maps fail in volatile quarters and how continuous actuarial thresholds reshape governance oversight.</p>
+                            <a href="./404.html" class="btn-text"><span>Read Article</span> <span class="material-symbols-outlined">arrow_forward</span></a>
+                        </div>
+                    </div>
+                    <div class="blog-card fade-up">
+                        <img src="./images/service-erm.webp" alt="Enterprise corporate risk strategy meeting" class="blog-card-img" loading="lazy">
+                        <div class="blog-card-body">
+                            <div class="blog-meta">Enterprise Risk | Jan 29, 2026</div>
+                            <h3 class="blog-title">Quantifying Intangible Brand Value During Material Crises</h3>
+                            <p class="blog-desc">A structured methodology for assessing reputational contagion across institutional shareholder portfolios.</p>
+                            <a href="./404.html" class="btn-text"><span>Read Article</span> <span class="material-symbols-outlined">arrow_forward</span></a>
+                        </div>
+                    </div>
+                    <div class="blog-card fade-up">
+                        <img src="./images/about-company.webp" alt="Advisory consultants reviewing risk governance" class="blog-card-img" loading="lazy">
+                        <div class="blog-card-body">
+                            <div class="blog-meta">Enterprise Risk | Jan 12, 2026</div>
+                            <h3 class="blog-title">Bridging Risk Taxonomy Between Operational Units &amp; the Board</h3>
+                            <p class="blog-desc">Eliminating dialect misalignment so operational hazards are translated directly into financial loss probability.</p>
+                            <a href="./404.html" class="btn-text"><span>Read Article</span> <span class="material-symbols-outlined">arrow_forward</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04 — CYBER RISK -->
+        <section class="section section-white" id="insight-cyber">
+            <div class="container">
+                <div class="section-eyebrow">
+                    <span class="material-symbols-outlined">security</span>
+                    <span>Cyber Defense &amp; InfoSec</span>
+                </div>
+                <h2 class="section-title">Cyber Risk &amp; Threat Intelligence</h2>
+                <div class="blog-grid">
+                    <div class="blog-card fade-up">
+                        <img src="./images/blog-cyber.webp" alt="Cyber warfare defense and network security" class="blog-card-img" loading="lazy">
+                        <div class="blog-card-body">
+                            <div class="blog-meta">Cyber Risk | Feb 24, 2026</div>
+                            <h3 class="blog-title">Zero-Trust Microsegmentation: Beyond the Marketing Buzzwords</h3>
+                            <p class="blog-desc">Architectural requirements for insulating core ERP ledgers from compromised edge development clusters.</p>
+                            <a href="./404.html" class="btn-text"><span>Read Article</span> <span class="material-symbols-outlined">arrow_forward</span></a>
+                        </div>
+                    </div>
+                    <div class="blog-card fade-up">
+                        <img src="./images/case-cyber.webp" alt="Cloud infrastructure defense monitoring" class="blog-card-img" loading="lazy">
+                        <div class="blog-card-body">
+                            <div class="blog-meta">Cyber Risk | Feb 05, 2026</div>
+                            <h3 class="blog-title">Ransomware Playbooks: Deciding When to Escalate to General Counsel</h3>
+                            <p class="blog-desc">Clear decision trees for navigating sanctions liabilities during complex nation-state cyber extortion demands.</p>
+                            <a href="./404.html" class="btn-text"><span>Read Article</span> <span class="material-symbols-outlined">arrow_forward</span></a>
+                        </div>
+                    </div>
+                    <div class="blog-card fade-up">
+                        <img src="./images/service-cyber.webp" alt="Cyber threat operations terminal" class="blog-card-img" loading="lazy">
+                        <div class="blog-card-body">
+                            <div class="blog-meta">Cyber Risk | Jan 18, 2026</div>
+                            <h3 class="blog-title">Auditing Software Dependencies in Continuous Deployment Pipelines</h3>
+                            <p class="blog-desc">How to systematically isolate upstream open-source package compromise before code hits production clouds.</p>
+                            <a href="./404.html" class="btn-text"><span>Read Article</span> <span class="material-symbols-outlined">arrow_forward</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05 — FINANCIAL RISK -->
+        <section class="section section-accent" id="insight-finance">
+            <div class="container">
+                <div class="section-eyebrow">
+                    <span class="material-symbols-outlined">payments</span>
+                    <span>Treasury &amp; Markets</span>
+                </div>
+                <h2 class="section-title">Financial Exposure &amp; Liquidity</h2>
+                <div class="blog-grid">
+                    <div class="blog-card fade-up">
+                        <img src="./images/blog-financial.webp" alt="Financial liquidity graphs and interest rate charts" class="blog-card-img" loading="lazy">
+                        <div class="blog-card-body">
+                            <div class="blog-meta">Financial Risk | Mar 02, 2026</div>
+                            <h3 class="blog-title">Stress Testing Corporate Commercial Paper in High-Rate Regimes</h3>
+                            <p class="blog-desc">How treasury teams calculate 90-day liquidity survival horizons when secondary short-term debt markets seize.</p>
+                            <a href="./404.html" class="btn-text"><span>Read Article</span> <span class="material-symbols-outlined">arrow_forward</span></a>
+                        </div>
+                    </div>
+                    <div class="blog-card fade-up">
+                        <img src="./images/case-finance.webp" alt="Foreign exchange corridor hedging" class="blog-card-img" loading="lazy">
+                        <div class="blog-card-body">
+                            <div class="blog-meta">Financial Risk | Feb 11, 2026</div>
+                            <h3 class="blog-title">Dynamic Foreign Exchange Corridors for Tier-1 Importers</h3>
+                            <p class="blog-desc">Replacing rigid forward contracts with algorithmic collar strategies during unexpected sovereign policy pivots.</p>
+                            <a href="./404.html" class="btn-text"><span>Read Article</span> <span class="material-symbols-outlined">arrow_forward</span></a>
+                        </div>
+                    </div>
+                    <div class="blog-card fade-up">
+                        <img src="./images/service-financial.webp" alt="Financial risk models and solvency audits" class="blog-card-img" loading="lazy">
+                        <div class="blog-card-body">
+                            <div class="blog-meta">Financial Risk | Jan 22, 2026</div>
+                            <h3 class="blog-title">Counterparty Solvency Scoring Under Basel IV Frameworks</h3>
+                            <p class="blog-desc">Standardized evaluation techniques for assessing banking partner systemic risks and deposit concentration safety.</p>
+                            <a href="./404.html" class="btn-text"><span>Read Article</span> <span class="material-symbols-outlined">arrow_forward</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 06 — COMPLIANCE -->
+        <section class="section section-white" id="insight-compliance">
+            <div class="container">
+                <div class="section-eyebrow">
+                    <span class="material-symbols-outlined">policy</span>
+                    <span>Regulatory Readiness</span>
+                </div>
+                <h2 class="section-title">Compliance &amp; Governance Insights</h2>
+                <div class="blog-grid">
+                    <div class="blog-card fade-up">
+                        <img src="./images/blog-compliance.webp" alt="Legal compliance scale and corporate regulation" class="blog-card-img" loading="lazy">
+                        <div class="blog-card-body">
+                            <div class="blog-meta">Compliance | Mar 08, 2026</div>
+                            <h3 class="blog-title">The Operational Burden of the EU Artificial Intelligence Act</h3>
+                            <p class="blog-desc">Actionable readiness steps for multinational enterprises deploying machine learning in credit and hiring systems.</p>
+                            <a href="./404.html" class="btn-text"><span>Read Article</span> <span class="material-symbols-outlined">arrow_forward</span></a>
+                        </div>
+                    </div>
+                    <div class="blog-card fade-up">
+                        <img src="./images/service-compliance.webp" alt="Regulatory compliance audit paperwork" class="blog-card-img" loading="lazy">
+                        <div class="blog-card-body">
+                            <div class="blog-meta">Compliance | Feb 16, 2026</div>
+                            <h3 class="blog-title">Standardizing SEC Material Cyber Event Disclosures</h3>
+                            <p class="blog-desc">How legal and engineering teams determine the precise 4-day materiality trigger threshold under Item 1.05.</p>
+                            <a href="./404.html" class="btn-text"><span>Read Article</span> <span class="material-symbols-outlined">arrow_forward</span></a>
+                        </div>
+                    </div>
+                    <div class="blog-card fade-up">
+                        <img src="./images/about-governance.webp" alt="Corporate ethics and compliance governance" class="blog-card-img" loading="lazy">
+                        <div class="blog-card-body">
+                            <div class="blog-meta">Compliance | Jan 26, 2026</div>
+                            <h3 class="blog-title">ESG Supply Chain Traceability &amp; Cross-Border Customs Penalties</h3>
+                            <p class="blog-desc">Mitigating import detention risks through third-party labor and environmental certification validation.</p>
+                            <a href="./404.html" class="btn-text"><span>Read Article</span> <span class="material-symbols-outlined">arrow_forward</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 07 — BUSINESS CONTINUITY -->
+        <section class="section section-accent" id="insight-continuity">
+            <div class="container">
+                <div class="section-eyebrow">
+                    <span class="material-symbols-outlined">emergency</span>
+                    <span>Operational Resilience</span>
+                </div>
+                <h2 class="section-title">Business Continuity In Action</h2>
+                <div class="blog-grid">
+                    <div class="blog-card fade-up">
+                        <img src="./images/blog-continuity.webp" alt="Supply chain continuity in transportation hub" class="blog-card-img" loading="lazy">
+                        <div class="blog-card-body">
+                            <div class="blog-meta">Continuity | Mar 12, 2026</div>
+                            <h3 class="blog-title">Dual-Sourced Operational Hubs: Calculating Real Redundancy</h3>
+                            <p class="blog-desc">Why having two distribution centers in the same power grid fails disaster recovery audits and how to separate nodes.</p>
+                            <a href="./404.html" class="btn-text"><span>Read Article</span> <span class="material-symbols-outlined">arrow_forward</span></a>
+                        </div>
+                    </div>
+                    <div class="blog-card fade-up">
+                        <img src="./images/service-continuity.webp" alt="Enterprise cloud data center failover" class="blog-card-img" loading="lazy">
+                        <div class="blog-card-body">
+                            <div class="blog-meta">Continuity | Feb 20, 2026</div>
+                            <h3 class="blog-title">Validating Immutable Backups Against Delayed Encryption Threats</h3>
+                            <p class="blog-desc">Best practices for air-gapped tape and cloud write-once storage to survive sophisticated sleeper ransom malware.</p>
+                            <a href="./404.html" class="btn-text"><span>Read Article</span> <span class="material-symbols-outlined">arrow_forward</span></a>
+                        </div>
+                    </div>
+                    <div class="blog-card fade-up">
+                        <img src="./images/case-continuity.webp" alt="Crisis command operations team" class="blog-card-img" loading="lazy">
+                        <div class="blog-card-body">
+                            <div class="blog-meta">Continuity | Jan 30, 2026</div>
+                            <h3 class="blog-title">Executive Crisis Communication Protocols During Black Swan Events</h3>
+                            <p class="blog-desc">Ensuring unhackable satellite and alternate messenger chains remain operational when primary office networks crash.</p>
+                            <a href="./404.html" class="btn-text"><span>Read Article</span> <span class="material-symbols-outlined">arrow_forward</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 08 — RISK TECHNOLOGY -->
+        <section class="section section-white" id="insight-technology">
+            <div class="container">
+                <div class="section-eyebrow">
+                    <span class="material-symbols-outlined">memory</span>
+                    <span>Computational Systems</span>
+                </div>
+                <h2 class="section-title">Risk Technology &amp; Modeling</h2>
+                <div class="blog-grid">
+                    <div class="blog-card fade-up">
+                        <img src="./images/blog-technology.webp" alt="Algorithmic risk models and computing technology" class="blog-card-img" loading="lazy">
+                        <div class="blog-card-body">
+                            <div class="blog-meta">Risk Tech | Mar 15, 2026</div>
+                            <h3 class="blog-title">Predictive Neural Networks for Early-Warning Liquidity Cascades</h3>
+                            <p class="blog-desc">How machine learning algorithms detect micro-movements across banking counterparties before public downgrades.</p>
+                            <a href="./404.html" class="btn-text"><span>Read Article</span> <span class="material-symbols-outlined">arrow_forward</span></a>
+                        </div>
+                    </div>
+                    <div class="blog-card fade-up">
+                        <img src="./images/analytics-preview.webp" alt="Enterprise analytics visualization wall" class="blog-card-img" loading="lazy">
+                        <div class="blog-card-body">
+                            <div class="blog-meta">Risk Tech | Feb 28, 2026</div>
+                            <h3 class="blog-title">The Death of the Annual Audit: Transitioning to Continuous Telemetry</h3>
+                            <p class="blog-desc">Architecting real-time risk data pipelines directly from core cloud providers into executive boardrooms.</p>
+                            <a href="./404.html" class="btn-text"><span>Read Article</span> <span class="material-symbols-outlined">arrow_forward</span></a>
+                        </div>
+                    </div>
+                    <div class="blog-card fade-up">
+                        <img src="./images/about-intelligence.webp" alt="Data analytics team reviewing stress test simulations" class="blog-card-img" loading="lazy">
+                        <div class="blog-card-body">
+                            <div class="blog-meta">Risk Tech | Feb 02, 2026</div>
+                            <h3 class="blog-title">Monte Carlo Stress Testing at Enterprise Scale</h3>
+                            <p class="blog-desc">Running tens of thousands of simultaneous variance scenarios on enterprise balance sheets without latency.</p>
+                            <a href="./404.html" class="btn-text"><span>Read Article</span> <span class="material-symbols-outlined">arrow_forward</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 09 — NEWSLETTER / CTA -->
+        <section class="section cta-banner-section" id="blog-newsletter">
+            <div class="container cta-banner-card fade-up">
+                <div class="section-eyebrow" style="color: var(--secondary); justify-content: center;">
+                    <span class="material-symbols-outlined">forward_to_inbox</span>
+                    <span>Executive Intelligence Briefing</span>
+                </div>
+                <h2>Subscribe to The STACKLY Risk Dispatch</h2>
+                <p>
+                    Receive bi-weekly quantitative risk analyses, regulatory briefings, and vulnerability alerts curated directly by our managing partners.
+                </p>
+                <div style="max-width: 540px; margin: 0 auto; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                    <input type="email" placeholder="Enter corporate email..." style="flex: 1; min-width: 260px; padding: 1rem 1.25rem; border-radius: 4px; background: var(--white); color: var(--primary); border: 1.5px solid var(--secondary);" aria-label="Corporate Email for Newsletter">
+                    <button type="button" class="btn btn-primary" onclick="alert('Thank you. You have been registered for the STACKLY Risk Dispatch.');">
+                        <span>Subscribe</span>
+                        <span class="material-symbols-outlined">send</span>
+                    </button>
+                </div>
+                <div style="margin-top: 1rem; font-size: 0.8rem; color: var(--accent-80);">
+                    No spam. Institutional-grade research only. Unsubscribe at any time.
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="./index.html" class="nav-logo" style="margin-bottom: 1rem;">
+                    <img src="./images/logo-dark.webp" alt="STACKLY Logo" class="nav-logo-img" style="filter: brightness(0) invert(1);">
+                </a>
+                <p>Intelligent risk management and business resilience consulting. Protecting enterprise capital, systems, and reputation worldwide.</p>
+                <div class="footer-socials">
+                    <a href="./404.html" class="footer-social-link" aria-label="LinkedIn"><span class="material-symbols-outlined">public</span></a>
+                    <a href="./404.html" class="footer-social-link" aria-label="Security Portal"><span class="material-symbols-outlined">shield</span></a>
+                    <a href="./404.html" class="footer-social-link" aria-label="Global Network"><span class="material-symbols-outlined">hub</span></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-col-title">Company</h4>
+                <div class="footer-links">
+                    <a href="./about.html">About STACKLY</a>
+                    <a href="./services.html">Advisory Services</a>
+                    <a href="./blog.html">Risk Insights</a>
+                    <a href="./contact.html">Contact Us</a>
+                    <a href="./login.html">Client Portal</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-col-title">Solutions</h4>
+                <div class="footer-links">
+                    <a href="./services.html#erm">Enterprise Risk</a>
+                    <a href="./services.html#cyber">Cyber Risk</a>
+                    <a href="./services.html#financial">Financial Risk</a>
+                    <a href="./services.html#compliance">Compliance</a>
+                    <a href="./services.html#continuity">Business Continuity</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-col-title">Resources</h4>
+                <div class="footer-links">
+                    <a href="./blog.html">Risk Reports</a>
+                    <a href="./user-dashboard.html">Risk Assessment Tool</a>
+                    <a href="./contact.html#faq">Advisory FAQ</a>
+                    <a href="./contact.html">Expert Support</a>
+                    <a href="./404.html">System Status</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-col-title">Contact</h4>
+                <div class="footer-contact-item">
+                    <span class="material-symbols-outlined">apartment</span>
+                    <span>100 Wall Street, 28th Floor, New York, NY 10005</span>
+                </div>
+                <div class="footer-contact-item">
+                    <span class="material-symbols-outlined">mail</span>
+                    <span>advisory@stacklyrisk.com</span>
+                </div>
+                <div class="footer-contact-item">
+                    <span class="material-symbols-outlined">call</span>
+                    <span>+1 (800) 482-7475</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="container footer-bottom">
+            <div>&copy; 2026 STACKLY Risk Management. All rights reserved.</div>
+            <div style="display: flex; gap: 1.5rem;">
+                <a href="./404.html">Privacy Policy</a>
+                <a href="./404.html">Terms of Governance</a>
+                <a href="./404.html">Regulatory Disclosures</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/main.js"></script>
+</body>
+</html>

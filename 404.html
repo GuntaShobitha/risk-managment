@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Risk Route Not Found | STACKLY</title>
+    <!-- Google Fonts & Material Symbols (No SVGs, No Emojis) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+    <!-- PRELOADER -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <img src="./images/logo-dark.webp" alt="STACKLY Logo" class="preloader-logo">
+            <div class="preloader-bar"><span></span></div>
+            <div class="preloader-text">Securing Session</div>
+        </div>
+    </div>
+
+    <div class="error-page-wrap">
+        <div class="error-content-box fade-up active">
+            <!-- Animated Radar / Broken Node Scanning Interface (Zero SVGs) -->
+            <div class="error-radar-scanner">
+                <div class="radar-scan-line"></div>
+                <span class="material-symbols-outlined">shield_locked</span>
+            </div>
+
+            <div class="error-code">404</div>
+            <h1 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 1rem;">Risk Route Not Found</h1>
+            <p style="font-size: 1.15rem; color: var(--accent-80); margin-bottom: 2.5rem; line-height: 1.7; max-width: 540px; margin-left: auto; margin-right: auto;">
+                The requested risk intelligence route could not be located. The target resource may have been decommissioned, re-encrypted, or moved to an air-gapped domain.
+            </p>
+
+            <div style="display: flex; align-items: center; justify-content: center; gap: 1.25rem; flex-wrap: wrap;">
+                <a href="./index.html" class="btn btn-primary">
+                    <span class="material-symbols-outlined">home</span>
+                    <span>Back to Home</span>
+                </a>
+                <button type="button" class="btn btn-secondary" onclick="window.history.back();" style="border-color: var(--secondary); color: var(--accent);">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    <span>Go Back</span>
+                </button>
+            </div>
+
+            <div style="margin-top: 3.5rem; display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1.25rem; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--secondary-20); border-radius: 50px; font-size: 0.8rem; color: var(--secondary);">
+                <span class="material-symbols-outlined" style="font-size: 16px;">policy</span>
+                <span>System Status: Core Security Grid Normal | Diagnostic Code: ERR_ROUTE_UNRESOLVED</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | STACKLY Risk Management</title>
+    <meta name="description" content="Explore STACKLY's enterprise risk management, financial hedging, cyber defense, operational resilience, and compliance advisory services.">
+    <!-- Google Fonts & Material Symbols (No SVGs, No Emojis) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+    <!-- PRELOADER -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <img src="./images/logo-dark.webp" alt="STACKLY Logo" class="preloader-logo">
+            <div class="preloader-bar"><span></span></div>
+            <div class="preloader-text">Securing Session</div>
+        </div>
+    </div>
+
+    <!-- STICKY HEADER -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="./index.html" class="nav-logo">
+                <img src="./images/logo-dark.webp" alt="STACKLY Logo" class="nav-logo-img">
+            </a>
+
+            <nav class="nav-menu" aria-label="Main Navigation">
+                <a href="./index.html" class="nav-link">Home</a>
+                <a href="./about.html" class="nav-link">About</a>
+                <a href="./services.html" class="nav-link active">Services</a>
+                <a href="./blog.html" class="nav-link">Blog</a>
+                <a href="./contact.html" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="./login.html" class="header-login">
+                    <span class="material-symbols-outlined">person</span>
+                    <span>Login</span>
+                </a>
+                <!-- <a href="./contact.html" class="btn btn-primary">
+                    <span>Get Started</span>
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </a> -->
+                <button type="button" class="hamburger-btn" aria-label="Open Mobile Menu">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU OVERLAY -->
+    <div class="mobile-nav-overlay" aria-hidden="true">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <a href="./index.html" class="nav-logo">
+                <img src="./images/logo-dark.webp" alt="STACKLY Logo" class="nav-logo-img" style="filter: brightness(0) invert(1);">
+            </a>
+            <button type="button" class="mobile-nav-close" style="color: var(--accent); cursor: pointer;" aria-label="Close Menu">
+                <span class="material-symbols-outlined" style="font-size: 32px;">close</span>
+            </button>
+        </div>
+        <div class="mobile-nav-links">
+            <a href="./index.html" class="mobile-nav-link">Home <span class="material-symbols-outlined">chevron_right</span></a>
+            <a href="./about.html" class="mobile-nav-link">About <span class="material-symbols-outlined">chevron_right</span></a>
+            <a href="./services.html" class="mobile-nav-link active">Services <span class="material-symbols-outlined">chevron_right</span></a>
+            <a href="./blog.html" class="mobile-nav-link">Blog <span class="material-symbols-outlined">chevron_right</span></a>
+            <a href="./contact.html" class="mobile-nav-link">Contact <span class="material-symbols-outlined">chevron_right</span></a>
+        </div>
+        <div class="mobile-nav-actions">
+            <a href="./login.html" class="btn btn-secondary" style="border-color: var(--secondary); color: var(--accent); width: 100%;">
+                <span class="material-symbols-outlined">login</span>
+                <span>Client Login</span>
+            </a>
+            <!-- <a href="./contact.html" class="btn btn-primary" style="width: 100%;">
+                <span>Get Started</span>
+                <span class="material-symbols-outlined">arrow_forward</span>
+            </a> -->
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT: EXACTLY 9 SECTIONS -->
+    <main>
+
+        <!-- 01 — SERVICES HERO -->
+        <section class="section about-hero" id="services-hero">
+            <div class="container text-center">
+                <div class="section-eyebrow">
+                    <span class="material-symbols-outlined">design_services</span>
+                    <span>Advisory Practice Areas</span>
+                </div>
+                <h1 class="section-title" style="max-width: 900px; margin-left: auto; margin-right: auto;">
+                    Enterprise Risk Solutions Tailored to Defend Your Balance Sheet
+                </h1>
+                <p class="section-subtitle" style="margin-left: auto; margin-right: auto;">
+                    Discover our seven specialized practice areas combining actuarial science, cybersecurity operations, and regulatory oversight to fortify your organization.
+                </p>
+            </div>
+        </section>
+
+        <!-- 02 — ENTERPRISE RISK MANAGEMENT -->
+        <section class="section service-detail-section section-white" id="erm">
+            <div class="container service-split-row">
+                <div class="service-detail-content fade-up">
+                    <div class="section-eyebrow">
+                        <span class="material-symbols-outlined">corporate_fare</span>
+                        <span>Practice 01</span>
+                    </div>
+                    <h2 class="section-title">Enterprise Risk Management (ERM)</h2>
+                    <p style="color: var(--primary-85); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
+                        Unify risk appetite frameworks across fragmented business divisions. We establish board-level ERM policies that quantify organizational exposure tolerances and streamline executive reporting.
+                    </p>
+                    <div class="service-feature-list">
+                        <div class="service-feature-item">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span>Board-approved Risk Appetite Statements &amp; Tolerance Thresholds</span>
+                        </div>
+                        <div class="service-feature-item">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span>COSO ERM &amp; ISO 31000 Compliance Alignment</span>
+                        </div>
+                        <div class="service-feature-item">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span>Executive Risk Committee Charter Development &amp; Training</span>
+                        </div>
+                    </div>
+                    <a href="./contact.html" class="btn btn-primary">
+                        <span>Inquire About ERM</span>
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                </div>
+
+                <div class="about-img-frame clip-reveal">
+                    <img src="./images/service-erm.webp" alt="Enterprise risk management strategic advisory session" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <!-- 03 — FINANCIAL RISK MANAGEMENT -->
+        <section class="section service-detail-section section-accent" id="financial">
+            <div class="container service-split-row reversed">
+                <div class="service-detail-content fade-up">
+                    <div class="section-eyebrow">
+                        <span class="material-symbols-outlined">payments</span>
+                        <span>Practice 02</span>
+                    </div>
+                    <h2 class="section-title">Financial Risk Management</h2>
+                    <p style="color: var(--primary-85); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
+                        Protect enterprise working capital and investment liquidity. Our quantitative models evaluate counterparty solvency, currency exchange volatility, and interest rate sensitivity under extreme macro scenarios.
+                    </p>
+                    <div class="service-feature-list">
+                        <div class="service-feature-item">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span>Dynamic Liquidity Stress Testing &amp; Capital Reserve Buffers</span>
+                        </div>
+                        <div class="service-feature-item">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span>Cross-Border Foreign Exchange (FX) Corridor Hedging Strategies</span>
+                        </div>
+                        <div class="service-feature-item">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span>Credit Default &amp; Counterparty Solvency Scoring</span>
+                        </div>
+                    </div>
+                    <a href="./contact.html" class="btn btn-primary">
+                        <span>Consult on Financial Risk</span>
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                </div>
+
+                <div class="about-img-frame clip-reveal">
+                    <img src="./images/service-financial.webp" alt="Financial risk analysis and market analytics" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <!-- 04 — CYBER RISK MANAGEMENT -->
+        <section class="section service-detail-section section-white" id="cyber">
+            <div class="container service-split-row">
+                <div class="service-detail-content fade-up">
+                    <div class="section-eyebrow">
+                        <span class="material-symbols-outlined">security</span>
+                        <span>Practice 03</span>
+                    </div>
+                    <h2 class="section-title">Cyber Risk &amp; Information Security</h2>
+                    <p style="color: var(--primary-85); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
+                        Anticipate modern adversarial campaigns before data exfiltration occurs. We conduct zero-trust architecture evaluations, third-party software supply chain audits, and ransomware breach simulation drills.
+                    </p>
+                    <div class="service-feature-list">
+                        <div class="service-feature-item">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span>Cloud Infrastructure &amp; Multi-Tenant Attack Surface Auditing</span>
+                        </div>
+                        <div class="service-feature-item">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span>Zero-Day Vulnerability Triage &amp; Patch Governance</span>
+                        </div>
+                        <div class="service-feature-item">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span>Ransomware Extortion Simulation &amp; C-Suite Crisis Playbooks</span>
+                        </div>
+                    </div>
+                    <a href="./contact.html" class="btn btn-primary">
+                        <span>Fortify Cyber Defense</span>
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                </div>
+
+                <div class="about-img-frame clip-reveal">
+                    <img src="./images/service-cyber.webp" alt="Cybersecurity intelligence and threat monitoring hub" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <!-- 05 — OPERATIONAL RISK MANAGEMENT -->
+        <section class="section service-detail-section section-accent" id="operational">
+            <div class="container service-split-row reversed">
+                <div class="service-detail-content fade-up">
+                    <div class="section-eyebrow">
+                        <span class="material-symbols-outlined">precision_manufacturing</span>
+                        <span>Practice 04</span>
+                    </div>
+                    <h2 class="section-title">Operational Risk Management</h2>
+                    <p style="color: var(--primary-85); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
+                        Identify single points of failure across automated production plants, key distribution centers, and critical vendor dependencies. Minimize downtime with rigorous root-cause failure analysis.
+                    </p>
+                    <div class="service-feature-list">
+                        <div class="service-feature-item">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span>Supply Chain Bottleneck &amp; Vendor Concentration Diagnostics</span>
+                        </div>
+                        <div class="service-feature-item">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span>Manufacturing Plant Equipment Uptime Failover Engineering</span>
+                        </div>
+                        <div class="service-feature-item">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span>Operational Loss Data Collection &amp; Predictive Root Cause Analysis</span>
+                        </div>
+                    </div>
+                    <a href="./contact.html" class="btn btn-primary">
+                        <span>Review Operational Controls</span>
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                </div>
+
+                <div class="about-img-frame clip-reveal">
+                    <img src="./images/service-operational.webp" alt="Industrial operations and automated manufacturing monitoring" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <!-- 06 — COMPLIANCE & REGULATORY RISK -->
+        <section class="section service-detail-section section-white" id="compliance">
+            <div class="container service-split-row">
+                <div class="service-detail-content fade-up">
+                    <div class="section-eyebrow">
+                        <span class="material-symbols-outlined">policy</span>
+                        <span>Practice 05</span>
+                    </div>
+                    <h2 class="section-title">Compliance &amp; Regulatory Risk</h2>
+                    <p style="color: var(--primary-85); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
+                        Maintain compliance confidence in an era of rapid legislative shifts. From SEC mandatory cyber disclosures and European AI Act governance to GDPR and ESG audits, we safeguard institutional reputation.
+                    </p>
+                    <div class="service-feature-list">
+                        <div class="service-feature-item">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span>SEC 10-K Risk Factor Disclosures &amp; Materiality Audits</span>
+                        </div>
+                        <div class="service-feature-item">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span>Cross-Border Sovereign Privacy Mandates (GDPR, CCPA, APPI)</span>
+                        </div>
+                        <div class="service-feature-item">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span>Emerging Artificial Intelligence (AI) Governance &amp; Ethical Guardrails</span>
+                        </div>
+                    </div>
+                    <a href="./contact.html" class="btn btn-primary">
+                        <span>Consult Compliance Advisory</span>
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                </div>
+
+                <div class="about-img-frame clip-reveal">
+                    <img src="./images/service-compliance.webp" alt="Regulatory compliance audit and legal documentation" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <!-- 07 — BUSINESS CONTINUITY & RESILIENCE -->
+        <section class="section service-detail-section section-accent" id="continuity">
+            <div class="container service-split-row reversed">
+                <div class="service-detail-content fade-up">
+                    <div class="section-eyebrow">
+                        <span class="material-symbols-outlined">emergency</span>
+                        <span>Practice 06</span>
+                    </div>
+                    <h2 class="section-title">Business Continuity &amp; Crisis Command</h2>
+                    <p style="color: var(--primary-85); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
+                        Ensure business survival during high-impact catastrophic events. We construct dual-redundant IT topologies, crisis communications cascades, and tested command playbooks for immediate execution.
+                    </p>
+                    <div class="service-feature-list">
+                        <div class="service-feature-item">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span>Business Impact Analysis (BIA) with RTO &amp; RPO Modeling</span>
+                        </div>
+                        <div class="service-feature-item">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span>Multi-Region Cloud Failover &amp; Air-Gapped Backup Validation</span>
+                        </div>
+                        <div class="service-feature-item">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span>Live Executive Tabletop Crisis Command Simulations</span>
+                        </div>
+                    </div>
+                    <a href="./contact.html" class="btn btn-primary">
+                        <span>Build Continuity Plan</span>
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                </div>
+
+                <div class="about-img-frame clip-reveal">
+                    <img src="./images/service-continuity.webp" alt="Resilient enterprise data center infrastructure" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <!-- 08 — RISK MONITORING & ANALYTICS -->
+        <section class="section service-detail-section section-dark" id="monitoring">
+            <div class="container service-split-row">
+                <div class="service-detail-content fade-up">
+                    <div class="section-eyebrow">
+                        <span class="material-symbols-outlined">monitoring</span>
+                        <span>Practice 07</span>
+                    </div>
+                    <h2 class="section-title">24/7 Risk Monitoring &amp; Telemetry</h2>
+                    <p style="color: var(--accent-80); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
+                        Never fly blind between quarterly board meetings. Our continuous risk telemetry monitors real-time changes in vendor security postures, liquidity thresholds, and compliance statuses.
+                    </p>
+                    <div class="service-feature-list">
+                        <div class="service-feature-item" style="color: var(--accent);">
+                            <span class="material-symbols-outlined" style="color: var(--secondary);">check_circle</span>
+                            <span>Automated Key Risk Indicator (KRI) Early-Warning Alerts</span>
+                        </div>
+                        <div class="service-feature-item" style="color: var(--accent);">
+                            <span class="material-symbols-outlined" style="color: var(--secondary);">check_circle</span>
+                            <span>Custom Executive Dashboards &amp; Audit Committee Portals</span>
+                        </div>
+                        <div class="service-feature-item" style="color: var(--accent);">
+                            <span class="material-symbols-outlined" style="color: var(--secondary);">check_circle</span>
+                            <span>Cryptographic Audit Logging for SEC &amp; Regulatory Review</span>
+                        </div>
+                    </div>
+                    <a href="./user-dashboard.html" class="btn btn-primary">
+                        <span>Launch Analytics Portal</span>
+                        <span class="material-symbols-outlined">dashboard</span>
+                    </a>
+                </div>
+
+                <div class="about-img-frame clip-reveal">
+                    <img src="./images/services-monitoring.webp" alt="24/7 continuous enterprise risk intelligence monitoring" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <!-- 09 — CTA -->
+        <section class="section cta-banner-section" id="services-cta">
+            <div class="container cta-banner-card fade-up">
+                <div class="section-eyebrow" style="color: var(--secondary); justify-content: center;">
+                    <span class="material-symbols-outlined">handshake</span>
+                    <span>Direct Engagement</span>
+                </div>
+                <h2>Partner with STACKLY Risk Advisors</h2>
+                <p>
+                    From specialized single-domain audits to comprehensive enterprise ERM implementation, our senior partners are ready to protect your business.
+                </p>
+                <div class="cta-buttons-center">
+                    <a href="./contact.html" class="btn btn-primary">
+                        <span>Request an Advisory Proposal</span>
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                    <a href="./login.html" class="btn btn-secondary">
+                        <span>Access Client Dashboard</span>
+                        <span class="material-symbols-outlined">login</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="./index.html" class="nav-logo" style="margin-bottom: 1rem;">
+                    <img src="./images/logo-dark.webp" alt="STACKLY Logo" class="nav-logo-img" style="filter: brightness(0) invert(1);">
+                </a>
+                <p>Intelligent risk management and business resilience consulting. Protecting enterprise capital, systems, and reputation worldwide.</p>
+                <div class="footer-socials">
+                    <a href="./404.html" class="footer-social-link" aria-label="LinkedIn"><span class="material-symbols-outlined">public</span></a>
+                    <a href="./404.html" class="footer-social-link" aria-label="Security Portal"><span class="material-symbols-outlined">shield</span></a>
+                    <a href="./404.html" class="footer-social-link" aria-label="Global Network"><span class="material-symbols-outlined">hub</span></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-col-title">Company</h4>
+                <div class="footer-links">
+                    <a href="./about.html">About STACKLY</a>
+                    <a href="./services.html">Advisory Services</a>
+                    <a href="./blog.html">Risk Insights</a>
+                    <a href="./contact.html">Contact Us</a>
+                    <a href="./login.html">Client Portal</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-col-title">Solutions</h4>
+                <div class="footer-links">
+                    <a href="./services.html#erm">Enterprise Risk</a>
+                    <a href="./services.html#cyber">Cyber Risk</a>
+                    <a href="./services.html#financial">Financial Risk</a>
+                    <a href="./services.html#compliance">Compliance</a>
+                    <a href="./services.html#continuity">Business Continuity</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-col-title">Resources</h4>
+                <div class="footer-links">
+                    <a href="./blog.html">Risk Reports</a>
+                    <a href="./user-dashboard.html">Risk Assessment Tool</a>
+                    <a href="./contact.html#faq">Advisory FAQ</a>
+                    <a href="./contact.html">Expert Support</a>
+                    <a href="./404.html">System Status</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-col-title">Contact</h4>
+                <div class="footer-contact-item">
+                    <span class="material-symbols-outlined">apartment</span>
+                    <span>100 Wall Street, 28th Floor, New York, NY 10005</span>
+                </div>
+                <div class="footer-contact-item">
+                    <span class="material-symbols-outlined">mail</span>
+                    <span>advisory@stacklyrisk.com</span>
+                </div>
+                <div class="footer-contact-item">
+                    <span class="material-symbols-outlined">call</span>
+                    <span>+1 (800) 482-7475</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="container footer-bottom">
+            <div>&copy; 2026 STACKLY Risk Management. All rights reserved.</div>
+            <div style="display: flex; gap: 1.5rem;">
+                <a href="./404.html">Privacy Policy</a>
+                <a href="./404.html">Terms of Governance</a>
+                <a href="./404.html">Regulatory Disclosures</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/main.js"></script>
+</body>
+</html>
