@@ -622,3 +622,45 @@ function initContactFormValidation() {
         window.location.href = './404.html';
     });
 }
+
+
+
+
+document.getElementById("newsletterForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const emailInput = document.getElementById("corporateEmail");
+    const emailError = document.getElementById("emailError");
+
+    const email = emailInput.value.trim();
+
+    // Email validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Clear previous error
+    emailError.style.display = "none";
+    emailError.textContent = "";
+    emailInput.style.borderColor = "var(--secondary)";
+
+    if (email === "") {
+        emailError.textContent = "Please enter your corporate email.";
+        emailError.style.display = "block";
+        emailInput.style.borderColor = "red";
+        emailInput.focus();
+        return;
+    }
+
+    if (!emailPattern.test(email)) {
+        emailError.textContent = "Please enter a valid email address.";
+        emailError.style.display = "block";
+        emailInput.style.borderColor = "red";
+        emailInput.focus();
+        return;
+    }
+
+    // Success
+    alert("Thank you. You have been registered for the STACKLY Risk Dispatch.");
+
+    // Redirect after successful validation
+    window.location.href = "404.html";
+});

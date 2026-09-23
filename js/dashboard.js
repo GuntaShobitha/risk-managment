@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initTableSearch();
     initSettingsForm();
     initMobileSidebar();
+    initLogoTab();
 });
 
 /* --- 1. USER PROFILE SYNCHRONIZATION --- */
@@ -305,7 +306,38 @@ function initMobileSidebar() {
     window.stacklyCloseSidebar = closeSidebar;
 }
 
-/* --- 8. TOPBAR NOTIFICATION SHORTCUT (mobile bell icon) --- */
+/* --- 8. LOGO ACTIVATES OVERVIEW TAB --- */
+// The sidebar logo switches back to the Dashboard/Overview tab instead of
+// navigating away to the public site (index.html).
+function initLogoTab() {
+    const logoLink = document.querySelector('.sidebar-brand .sidebar-logo-link');
+    if (!logoLink) return;
+
+    logoLink.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const overviewLink = document.querySelector('.dashboard-sidebar .sidebar-link[data-tab="overview"]');
+        if (overviewLink) {
+            overviewLink.click();
+        } else {
+            // Fallback: switch panes manually if no sidebar link exists
+            document.querySelectorAll('.dashboard-tab-pane').forEach(pane => {
+                pane.classList.toggle('active', pane.id === 'tab-overview');
+            });
+        }
+
+        // Scroll the main column back to the top
+        const scroller = document.querySelector('.dashboard-main');
+        if (scroller) scroller.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Close the mobile drawer if it is open
+        if (window.innerWidth <= 1024 && typeof window.stacklyCloseSidebar === 'function') {
+            window.stacklyCloseSidebar();
+        }
+    });
+}
+
+/* --- 9. TOPBAR NOTIFICATION SHORTCUT (mobile bell icon) --- */
 window.stacklyTopbarBell = function () {
     // Activate the Notifications tab via its sidebar link
     const notificationsLink = document.querySelector('.dashboard-sidebar .sidebar-link[data-tab="notifications"]');

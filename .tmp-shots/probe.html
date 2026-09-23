@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+<iframe id="f" src="../user-dashboard.html" width="390" height="844"></iframe>
+<pre id="out">PENDING</pre>
+<script>
+document.getElementById('f').onload = function() {
+  setTimeout(() => {
+    try {
+      const d = document.getElementById('f').contentDocument;
+      const w = document.getElementById('f').contentWindow;
+      const lines = [];
+      const q = (sel) => {
+        const el = d.querySelector(sel);
+        if (!el) return sel + ': NOT FOUND';
+        const cs = w.getComputedStyle(el);
+        return sel + ' => display:' + cs.display + ' | color:' + cs.color + ' | bg:' + cs.backgroundColor + ' | vis:' + cs.visibility + ' | op:' + cs.opacity + ' | pos:' + cs.position + ' | transform:' + cs.transform;
+      };
+      ['.dashboard-topbar', '.dashboard-sidebar-toggle', '.topbar-mobile-brand', '.topbar-title', '.topbar-bell', '.dashboard-sidebar', '.sidebar-brand', '.sidebar-link', '.sidebar-user-name', '.sidebar-user-email', '.dashboard-main', 'body', '.dashboard-layout'].forEach(s => lines.push(q(s)));
+      lines.push('iframe viewport: ' + w.innerWidth + 'x' + w.innerHeight);
+      document.getElementById('out').textContent = lines.join('\n');
+    } catch (e) {
+      document.getElementById('out').textContent = 'ERROR: ' + e.message;
+    }
+  }, 800);
+};
+</script>
+</body>
+</html>

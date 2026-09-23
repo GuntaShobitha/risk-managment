@@ -378,13 +378,22 @@
                 <p>
                     Receive bi-weekly quantitative risk analyses, regulatory briefings, and vulnerability alerts curated directly by our managing partners.
                 </p>
-                <div style="max-width: 540px; margin: 0 auto; display: flex; gap: 0.75rem; flex-wrap: wrap;">
-                    <input type="email" placeholder="Enter corporate email..." style="flex: 1; min-width: 260px; padding: 1rem 1.25rem; border-radius: 4px; background: var(--white); color: var(--primary); border: 1.5px solid var(--secondary);" aria-label="Corporate Email for Newsletter">
-                    <button type="button" class="btn btn-primary" onclick="alert('Thank you. You have been registered for the STACKLY Risk Dispatch.');">
-                        <span>Subscribe</span>
-                        <span class="material-symbols-outlined">send</span>
-                    </button>
-                </div>
+                <form id="newsletterForm" style="max-width: 540px; margin: 0 auto; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+    <input
+        type="email"
+        id="corporateEmail"
+        placeholder="Enter corporate email..."
+        style="flex: 1; min-width: 260px; padding: 1rem 1.25rem; border-radius: 4px; background: var(--white); color: var(--primary); border: 1.5px solid var(--secondary);"
+        aria-label="Corporate Email for Newsletter"
+    >
+
+    <button type="submit" class="btn btn-primary">
+        <span>Subscribe</span>
+        <span class="material-symbols-outlined">send</span>
+    </button>
+
+    <small id="emailError" style="width: 100%; color: red; display: none;"></small>
+</form>
                 <div style="margin-top: 1rem; font-size: 0.8rem; color: var(--accent-80);">
                     No spam. Institutional-grade research only. Unsubscribe at any time.
                 </div>
