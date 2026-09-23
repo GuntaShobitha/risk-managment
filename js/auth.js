@@ -155,9 +155,9 @@ function initAuthForms() {
 
             // Redirect based on selected role
             if (role.toLowerCase() === 'admin') {
-                window.location.href = './admin-dashboard.html';
+                window.location.href = './login.html';
             } else {
-                window.location.href = './user-dashboard.html';
+                window.location.href = './login.html';
             }
         });
     }

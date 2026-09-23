@@ -24,9 +24,16 @@ document.addEventListener('DOMContentLoaded', () => {
     initTestimonialCarousel();
     initFaqAccordion();
     initMagneticButtons();
+    initContactFormValidation();
 });
 
-/* --- 0. PRELOADER (every refresh, every page) --- */
+/* --- 0. PRELOADER ---
+ * Optimized: dismisses as soon as the DOM is ready (DOMContentLoaded) instead
+ * of waiting for the full `load` event (which blocks on every image, font and
+ * the map iframe). The preloader is a brand splash, not a real progress bar,
+ * so there is no reason to hold the page hostage while heavy assets stream in.
+ * The CSS `preloaderSafety` animation remains as a fallback.
+ */
 function initPreloader() {
     /* Adopt the preloader markup already in the HTML, or inject one */
     let pre = document.querySelector('.preloader');
@@ -45,10 +52,13 @@ function initPreloader() {
 
     document.body.classList.add('preloading');
 
-    const MIN_SHOW = 900;
+    const MIN_SHOW = 400;
     const start = Date.now();
+    let dismissed = false;
 
     const dismiss = () => {
+        if (dismissed) return;
+        dismissed = true;
         const wait = Math.max(0, MIN_SHOW - (Date.now() - start));
         setTimeout(() => {
             pre.classList.add('done');
@@ -57,13 +67,13 @@ function initPreloader() {
         }, wait);
     };
 
-    if (document.readyState === 'complete') {
-        dismiss();
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', dismiss);
     } else {
-        window.addEventListener('load', dismiss);
-        /* Hard safety: never trap the user behind the preloader */
-        setTimeout(dismiss, 4000);
+        dismiss();
     }
+    /* Hard safety: never trap the user behind the preloader */
+    setTimeout(dismiss, 2500);
 }
 
 /* --- 1. STICKY HEADER & SCROLL STATE --- */
@@ -510,5 +520,105 @@ function initMagneticButtons() {
         btn.addEventListener('mouseleave', () => {
             btn.style.transform = 'translate(0px, 0px)';
         });
+    });
+}
+
+/* --- 12. CONTACT FORM VALIDATION (pure JS, no native HTML validation) ---
+ * The form on contact.html has `novalidate` and no `required` attributes:
+ * every rule is enforced here. On success it redirects to 404.html.
+ */
+function initContactFormValidation() {
+    const form = document.getElementById('stackly-contact-form');
+    if (!form) return;
+
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/;
+    /* Digits/spaces/()+- only, then 7–15 digits total (allows +91, (555) etc.) */
+    const PHONE_CLEAN_RE = /^[\d\s()+\-]+$/;
+    const NAME_RE = /^[A-Za-z][A-Za-z .'-]*$/;
+
+    const rules = {
+        'contact-name': (v) => {
+            if (!v.trim()) return 'Please enter your full name.';
+            if (v.trim().length < 3) return 'Name must be at least 3 characters long.';
+            if (!NAME_RE.test(v.trim())) return 'Name may only contain letters, spaces, apostrophes and hyphens.';
+            return '';
+        },
+        'contact-email': (v) => {
+            if (!v.trim()) return 'Please enter your corporate email address.';
+            if (!EMAIL_RE.test(v.trim())) return 'Please enter a valid email address (e.g. name@company.com).';
+            return '';
+        },
+        'contact-phone': (v) => {
+            const digits = v.replace(/\D/g, '');
+            if (!v.trim()) return 'Please enter your phone number.';
+            if (!PHONE_CLEAN_RE.test(v.trim()) || digits.length < 7 || digits.length > 15) {
+                return 'Please enter a valid phone number (7–15 digits, may start with +).';
+            }
+            return '';
+        },
+        'contact-company': (v) => {
+            if (!v.trim()) return 'Please enter your company or organization name.';
+            if (v.trim().length < 2) return 'Company name must be at least 2 characters long.';
+            return '';
+        },
+        'contact-risk-area': (v) => {
+            if (!v) return 'Please select your primary risk area of concern.';
+            return '';
+        },
+        'contact-message': (v) => {
+            if (!v.trim()) return 'Please describe your objectives.';
+            if (v.trim().length < 10) return 'Description must be at least 10 characters long.';
+            if (v.trim().length > 2000) return 'Description must be under 2000 characters.';
+            return '';
+        }
+    };
+
+    const validateField = (id) => {
+        const field = document.getElementById(id);
+        const errorEl = form.querySelector(`[data-error-for="${id}"]`);
+        if (!field || !errorEl || !rules[id]) return true;
+
+        const message = rules[id](field.value);
+        errorEl.textContent = message;
+        errorEl.classList.toggle('active', !!message);
+        field.classList.toggle('input-invalid', !!message);
+        return !message;
+    };
+
+    Object.keys(rules).forEach(id => {
+        const field = document.getElementById(id);
+        if (!field) return;
+
+        field.addEventListener('blur', () => validateField(id));
+        field.addEventListener('input', () => {
+            /* Once a field is marked invalid, re-validate live while typing */
+            if (field.classList.contains('input-invalid')) validateField(id);
+        });
+        if (field.tagName === 'SELECT') {
+            field.addEventListener('change', () => validateField(id));
+        }
+    });
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        let isValid = true;
+        let firstInvalid = null;
+        Object.keys(rules).forEach(id => {
+            const ok = validateField(id);
+            if (!ok) {
+                isValid = false;
+                if (!firstInvalid) firstInvalid = document.getElementById(id);
+            }
+        });
+
+        if (!isValid) {
+            if (firstInvalid) firstInvalid.focus();
+            return;
+        }
+
+        /* Valid — reset, then simulate submission by navigating to 404.html */
+        form.reset();
+        window.location.href = './404.html';
     });
 }

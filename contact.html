@@ -208,32 +208,37 @@
                 </div>
 
                 <div class="form-wrapper fade-up">
-                    <form id="stackly-contact-form" novalidate onsubmit="event.preventDefault(); alert('Inquiry received. A STACKLY senior risk partner will contact you shortly.'); this.reset();">
+                    <!-- Validation is handled entirely by JS (js/main.js) -->
+                    <form id="stackly-contact-form" novalidate>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="contact-name" class="form-label">Full Name *</label>
-                                <input type="text" id="contact-name" class="form-control" placeholder="e.g. Eleanor Vance" required>
+                                <input type="text" id="contact-name" class="form-control" placeholder="e.g. Eleanor Vance">
+                                <div class="form-error" data-error-for="contact-name"></div>
                             </div>
                             <div class="form-group">
                                 <label for="contact-email" class="form-label">Corporate Email *</label>
-                                <input type="email" id="contact-email" class="form-control" placeholder="name@company.com" required>
+                                <input type="text" id="contact-email" class="form-control" placeholder="name@company.com">
+                                <div class="form-error" data-error-for="contact-email"></div>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="contact-phone" class="form-label">Phone Number *</label>
-                                <input type="tel" id="contact-phone" class="form-control" placeholder="+1 (555) 000-0000" required>
+                                <input type="text" id="contact-phone" class="form-control" placeholder="+1 (555) 000-0000">
+                                <div class="form-error" data-error-for="contact-phone"></div>
                             </div>
                             <div class="form-group">
                                 <label for="contact-company" class="form-label">Company / Organization *</label>
-                                <input type="text" id="contact-company" class="form-control" placeholder="Enterprise Co." required>
+                                <input type="text" id="contact-company" class="form-control" placeholder="Enterprise Co.">
+                                <div class="form-error" data-error-for="contact-company"></div>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="contact-risk-area" class="form-label">Primary Risk Area of Concern *</label>
-                            <select id="contact-risk-area" class="form-control" required style="cursor: pointer;">
+                            <select id="contact-risk-area" class="form-control" style="cursor: pointer;">
                                 <option value="" disabled selected>Select Primary Practice Area...</option>
                                 <option value="Enterprise Risk">Enterprise Risk (ERM &amp; Governance)</option>
                                 <option value="Financial Risk">Financial Risk (Liquidity &amp; FX Hedging)</option>
@@ -243,11 +248,13 @@
                                 <option value="Business Continuity">Business Continuity &amp; Disaster Recovery</option>
                                 <option value="Other">Other Specialized Advisory</option>
                             </select>
+                            <div class="form-error" data-error-for="contact-risk-area"></div>
                         </div>
 
                         <div class="form-group">
                             <label for="contact-message" class="form-label">Brief Description of Objectives *</label>
-                            <textarea id="contact-message" rows="4" class="form-control" placeholder="Describe current risk priorities or upcoming audit requirements..." required></textarea>
+                            <textarea id="contact-message" rows="4" class="form-control" placeholder="Describe current risk priorities or upcoming audit requirements..."></textarea>
+                            <div class="form-error" data-error-for="contact-message"></div>
                         </div>
 
                         <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.1rem;">

@@ -1842,7 +1842,7 @@ html.js .fade-up:not(.anim-active) {
 
 .form-error {
     font-size: 0.8rem;
-    color: var(--secondary);
+    color: red;
     font-weight: 600;
     margin-top: 0.35rem;
     display: none;
@@ -1850,6 +1850,20 @@ html.js .fade-up:not(.anim-active) {
 
 .form-error.active {
     display: block;
+}
+
+/* JS-validation state (contact form) */
+.form-control.input-invalid {
+    border-color: #C0392B;
+    background: #FDF3F2;
+}
+
+.form-control.input-invalid:focus {
+    border-color: #C0392B;
+}
+
+select.form-control.input-invalid {
+    color: #C0392B;
 }
 
 /* Accordion FAQ */
@@ -3278,7 +3292,16 @@ body.preloading {
 }
 
 .about-img-frame.anim-active {
-    animation: irisReveal 0.1s var(--ease-out) both;
+    /* FIX: irisReveal on an overflow:hidden wrapper clipped the image into
+       expanding slices, which read as constant flicker. This is a calm,
+       one-shot fade/rise; the clip-path variant remains available via
+       .clip-reveal.active. */
+    animation: fadeUpSoft 0.9s var(--ease-out) 0.15s both;
+}
+
+@keyframes fadeUpSoft {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 .auth-page-wrap.anim-active .auth-card {
