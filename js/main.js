@@ -659,7 +659,7 @@ document.getElementById("newsletterForm").addEventListener("submit", function (e
     }
 
     // Success
-    alert("Thank you. You have been registered for the STACKLY Risk Dispatch.");
+    
 
     // Redirect after successful validation
     window.location.href = "404.html";
