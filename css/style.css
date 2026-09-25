@@ -5,8 +5,8 @@
    Material Symbols Only. Zero SVGs. Zero Emojis.
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Public+Sans:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+/* Fonts (Manrope, Public Sans, Material Symbols) load via <link rel="stylesheet">
+   with preconnect hints in every HTML <head> — faster than render-blocking @import. */
 
 /* --- 1. CSS VARIABLES --- */
 :root {
@@ -522,11 +522,11 @@ html.js .fade-up:not(.anim-active) {
 /* Clip-path reveal */
 .clip-reveal {
     /* clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%); */
-    transition: clip-path 0.9s var(--ease-out);
+    /* transition: clip-path 0.9s var(--ease-out); */
 }
 
 .clip-reveal.active {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    /* clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); */
 }
 
 /* --- 6. HOME PAGE SECTIONS --- */
@@ -1713,7 +1713,7 @@ html.js .fade-up:not(.anim-active) {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    margin-top: 3.5rem;
+    /* margin-top: 3.5rem; */
 }
 
 .blog-card {
@@ -2917,6 +2917,25 @@ body.preloading {
     to   { opacity: 1; letter-spacing: 0.15em; transform: translateY(0); }
 }
 
+/* HOVER FIX: entry animations held 'both' fill-mode, which kept the final
+   keyframe transform locked on the element and blocked :hover transforms.
+   'backwards' keeps the staggered entry but releases the card after it lands. */
+.service-card.anim-active,
+.industry-card.anim-active,
+.value-card.anim-active,
+.blog-card.anim-active,
+.contact-card.anim-active,
+.featured-blog-card.anim-active,
+.stat-card.anim-active {
+    animation-fill-mode: backwards;
+}
+
+/* Hover-safe release for split-word hero headline spans */
+.hero-section.anim-active .hero-title .sw:hover,
+.hero-section.anim-active .hero-title .swi:hover {
+    transform: none;
+}
+
 @keyframes subtitleIn {
     from { opacity: 0; transform: translateY(18px); filter: blur(6px); }
     to   { opacity: 0.85; transform: translateY(0); filter: blur(0); }
@@ -3036,6 +3055,26 @@ body.preloading {
     opacity: 1;
     transform: perspective(900px) rotateX(0deg) translateY(0);
     transition: opacity 0.6s ease, transform 0.7s var(--ease-out);
+}
+
+/* HOVER FIX: Risk Intelligence Framework Phases 01-05 must respond on hover
+   even while the section is in its replayable animation state. */
+.pathway-section.anim-active .pathway-step:hover,
+.pathway-section.anim-active .pathway-step.active:hover {
+    border-top-color: var(--secondary);
+    background-color: var(--primary);
+    color: var(--accent);
+    opacity: 1;
+    transform: perspective(900px) rotateX(0deg) translateY(-8px);
+    box-shadow: var(--shadow-md);
+}
+
+.pathway-section.anim-active .pathway-step:hover .pathway-icon {
+    color: var(--secondary);
+}
+
+.pathway-section.anim-active .pathway-step:hover .pathway-text {
+    color: var(--accent-80);
 }
 
 /* --- 18d. SECTION 03 — Services: alternating swing-in cards --- */
@@ -3300,7 +3339,7 @@ body.preloading {
        expanding slices, which read as constant flicker. This is a calm,
        one-shot fade/rise; the clip-path variant remains available via
        .clip-reveal.active. */
-    animation: fadeUpSoft 0.9s var(--ease-out) 0.15s both;
+    /* animation: fadeUpSoft 0.9s var(--ease-out) 0.15s both; */
 }
 
 @keyframes fadeUpSoft {
@@ -3443,4 +3482,145 @@ body.preloading {
 .map-section:hover .map-address {
   background: #1e1e22;
   color: var(--gold-light);
+}
+
+/* ==========================================================================
+   21. HOVER STATES — HOME (Industries), ABOUT (analysis & expertise cards),
+       and DASHBOARDS (User & Admin)
+   Higher-specificity selectors so :hover wins over the .fade-up.anim-active
+   reset transform (html.js prefix gives that rule (0,2,1) specificity).
+   ========================================================================== */
+
+/* --- HOME: Industries We Protect (8 sector cards) --- */
+.industries-grid .industry-card:hover {
+    background: var(--primary);
+    color: var(--accent);
+    transform: translateY(-8px);
+    border-color: var(--secondary);
+    box-shadow: var(--shadow-md);
+}
+
+.industries-grid .industry-card:hover .industry-desc {
+    color: var(--accent-80);
+}
+
+.industries-grid .industry-card:hover .industry-icon {
+    transform: scale(1.12) rotate(-4deg);
+}
+
+/* --- ABOUT: Data-Driven Risk Analysis cards --- */
+.about-values-grid .value-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--secondary);
+    box-shadow: var(--shadow-md);
+}
+
+.about-values-grid .value-card:hover .value-card-icon {
+    transform: scale(1.15);
+    color: var(--primary);
+}
+
+.value-card-icon {
+    transition: transform 0.3s var(--ease-out), color 0.3s var(--ease-out);
+}
+
+/* --- ABOUT: Deep Functional Domain Expertise cards (inline-styled grid) --- */
+#our-expertise div[style*="repeat(auto-fit, minmax(220px"] > div {
+    transition: transform 0.35s var(--ease-out), background-color 0.35s var(--ease-out),
+                border-color 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out);
+}
+
+#our-expertise div[style*="repeat(auto-fit, minmax(220px"] > div:hover {
+    background: var(--primary);
+    transform: translateY(-8px);
+    border-color: var(--secondary);
+    box-shadow: var(--shadow-md);
+}
+
+/* --- DASHBOARD (User & Admin): shared motion base --- */
+.stat-card,
+.data-card,
+.notif-item,
+.dashboard-tile,
+.cat-item {
+    transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out),
+                border-color 0.3s var(--ease-out), background-color 0.3s var(--ease-out);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--secondary);
+    box-shadow: var(--shadow-md);
+}
+
+.stat-card:hover .stat-icon {
+    background: var(--primary);
+}
+
+.stat-card:hover .stat-icon .material-symbols-outlined {
+    color: var(--secondary) !important; /* icons carry inline colors */
+}
+
+.data-card:hover {
+    border-color: var(--secondary-40);
+    box-shadow: var(--shadow-md);
+}
+
+.notif-item:hover,
+.cat-item:hover {
+    background: var(--accent-50);
+    transform: translateX(4px);
+}
+
+.dashboard-tile:hover {
+    transform: translateY(-5px);
+    border-color: var(--secondary);
+    background: var(--accent);
+    box-shadow: var(--shadow-md);
+}
+
+/* Sidebar links: slide right + icon pop */
+.sidebar-link {
+    border-left: 3px solid transparent;
+}
+
+.sidebar-link:hover {
+    transform: translateX(4px);
+}
+
+.sidebar-link .material-symbols-outlined {
+    transition: transform 0.25s ease;
+}
+
+.sidebar-link:hover .material-symbols-outlined {
+    transform: scale(1.12);
+}
+
+.sidebar-logo-link:hover img {
+    filter: brightness(0) invert(1) drop-shadow(0 0 6px var(--secondary-40)) !important;
+}
+
+.sidebar-user-avatar {
+    transition: transform 0.3s ease;
+}
+
+.sidebar-user:hover .sidebar-user-avatar {
+    transform: scale(1.08);
+}
+
+/* Topbar actions */
+.topbar-signout:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--white);
+}
+
+.dashboard-sidebar-toggle:hover {
+    color: var(--secondary);
+}
+
+.topbar-bell:hover {
+    background: rgba(200, 155, 60, 0.12) !important; /* beats inline bg */
+    border-color: var(--secondary) !important;
+    color: var(--secondary);
 }
